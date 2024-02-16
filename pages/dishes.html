@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dishes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Our Dishes</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a href="dishes.html">Dishes</a></li>
+                <li><a href="ingredients.html">Ingredients</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="deliveries.html">Deliveries</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>List of Dishes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
+                    <tr>
+                        <td>1</td>
+                        <td>Quesadilla</td>
+                        <td>Entree</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Empanadas</td>
+                        <td>Entree</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Chicken Fingers</td>
+                        <td>Entree</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <form method="POST" action="/add-dish" style="margin-top: 20px;">
+                <fieldset>
+                    <legend><strong>Add New Dish</strong></legend>
+                    <label for="name">Dish Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="type">Dish Type:</label>
+                    <input type="text" id="type" name="type" required>
+                    
+                    <input type="submit" value="Add Dish">
+                </fieldset>
+            </form>
+            
+        </section>
+    </main>
+    <footer>
+        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deliveries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Delivery Records</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a href="dishes.html">Dishes</a></li>
+                <li><a href="ingredients.html">Ingredients</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="deliveries.html">Deliveries</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>List of Deliveries</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ingredient ID</th>
+                        <th>Supplier ID</th>
+                        <th>Restaurant ID</th>
+                        <th>Delivery Date</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>4</td>
+                        <td>1</td>
+                        <td>2024-02-07</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2024-02-06</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>2024-02-05</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2024-02-05</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <form method="POST" action="/add-delivery" style="margin-top: 20px;">
+                <fieldset>
+                    <legend><strong>Add New Delivery</strong></legend>
+                    <label for="ingredientId">Ingredient ID:</label>
+                    <input type="number" id="ingredientId" name="ingredientId" required>
+                    
+                    <label for="supplierId">Supplier ID:</label>
+                    <input type="number" id="supplierId" name="supplierId" required>
+                    
+                    <label for="restaurantId">Restaurant ID:</label>
+                    <input type="number" id="restaurantId" name="restaurantId" required>
+                    
+                    <label for="deliveryDate">Delivery Date:</label>
+                    <input type="date" id="deliveryDate" name="deliveryDate" required>
+                    
+                    <input type="submit" value="Add Delivery">
+                </fieldset>
+            </form>
+            
+        </section>
+    </main>
+    <footer>
+        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+    </footer>
+</body>
+</html>
