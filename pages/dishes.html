@@ -135,11 +135,84 @@
                     
                     <label for="type">Dish Type:</label>
                     <input type="text" id="type" name="type" required>
-                    
+
+                    <label for="ingredients">Ingredients:</label>
+                    <select id="ingredients" name="ingredients[]" multiple="multiple" required>
+                        <option value="ingredientId1">Oxaca Cheese</option>
+                        <option value="ingredientId2">Chicken</option>
+                        <option value="ingredientId2">Tequila</option>
+                        <option value="ingredientId2">Shrimp</option>
+                        <option value="ingredientId2">Potatoes</option>
+                        <option value="ingredientId2">Ice Cream</option>
+                    </select>
+
                     <input type="submit" value="Add Dish">
                 </fieldset>
             </form>
-            
+        </section>
+        <section>
+            <h2>Dish Ingredients</h2>
+            <details>
+                <summary>Quesadilla (Dish ID: 1)</summary>
+                <ul>
+                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                    <li>Chicken (Ingredient ID: 2)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Empanadas (Dish ID: 2)</summary>
+                <ul>
+                    <li>Chicken (Ingredient ID: 2)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Chicken Fingers (Dish ID: 3)</summary>
+                <ul>
+                    <li>Chicken (Ingredient ID: 2)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Chicken Fries (Dish ID: 4)</summary>
+                <ul>
+                    <li>Chicken (Ingredient ID: 2)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Mozzarella Sticks (Dish ID: 5)</summary>
+                <ul>
+                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Popcorn Shrimp (Dish ID: 6)</summary>
+                <ul>
+                    <li>Shrimp (Ingredient ID: 4)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Cheese Cake (Dish ID: 7)</summary>
+                <ul>
+                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Vanilla Ice Cream (Dish ID: 8)</summary>
+                <ul>
+                    <li>Ice Cream (Ingredient ID: 6)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Mojito (Dish ID: 9)</summary>
+                <ul>
+                    <li>Tequila (Ingredient ID: 3)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Margarita (Dish ID: 10)</summary>
+                <ul>
+                    <li>Tequila (Ingredient ID: 3)</li>
+                </ul>
+            </details>
         </section>
     </main>
     <footer>

@@ -99,10 +99,87 @@
                     <label for="specialization">Specialization:</label>
                     <input type="text" id="specialization" name="specialization" required>
                     
+                    <label for="ingredients">Ingredients:</label>
+                    <select id="ingredients" name="ingredients[]" multiple="multiple" required>
+                        <option value="ingredientId1">Oxaca Cheese</option>
+                        <option value="ingredientId2">Chicken</option>
+                        <option value="ingredientId2">Tequila</option>
+                        <option value="ingredientId2">Shrimp</option>
+                        <option value="ingredientId2">Potatoes</option>
+                        <option value="ingredientId2">Ice Cream</option>
+                    </select>
+
                     <input type="submit" value="Add Supplier">
                 </fieldset>
             </form>
-            
+        </section>
+        <section>
+            <h2>Supplier Ingredients</h2>
+            <details>
+                <summary>Jeffs Veges - Vegetables (Supplier ID: 1)</summary>
+                <ul>
+                    <li>Potatoes (Ingredient ID: 5)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Carne Street - Meats (Supplier ID: 2)</summary>
+                <ul>
+                    <li>Chicken (Ingredient ID: 2)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>SeaFeed - Seafood (Supplier ID: 3)</summary>
+                <ul>
+                    <li>Shrimp (Ingredient ID: 4)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Farming Pros - Fruits and Cheese (Supplier ID: 4)</summary>
+                <ul>
+                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Ice Temple - Ice Cream (Supplier ID: 5)</summary>
+                <ul>
+                    <li>Tequila (Ingredient ID: 3)</li>
+                    <li>Ice Cream (Ingredient ID: 6)</li>
+                </ul>
+            </details>
+        </section>
+        <section>
+            <h2>Supplied Restaurants</h2>
+            <details>
+                <summary>Jeffs Veges - Supplier ID: 1</summary>
+                <ul>
+                    <li>Kevin Bacon - Restaurant ID: 1</li>
+                    <li>Jose Guiverra - Restaurant ID: 3</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Carne Street - Supplier ID: 2</summary>
+                <ul>
+                    <li>Kevin Bacon - Restaurant ID: 1</li>
+                </ul>
+            </details>
+            <details>
+                <summary>SeaFeed - Supplier ID: 3</summary>
+                <ul>
+                    <li>Maria Campbell - Restaurant ID: 2</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Farming Pros - Supplier ID: 4</summary>
+                <ul>
+                    <li>Maria Campbell - Restaurant ID: 2</li>
+                </ul>
+            </details>
+            <details>
+                <summary>Ice Temple - Supplier ID: 5</summary>
+                <ul>
+                    <li>Jose Guiverra - Restaurant ID: 3</li>
+                </ul>
+            </details>
         </section>
     </main>
     <footer>
