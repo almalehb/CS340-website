@@ -1,0 +1,20 @@
+{
+  "name": "cs340-group201",
+  "version": "1.0.0",
+  "description": "Restaurant Database",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mysql",
+    "node.js"
+  ],
+  "author": "almalehb@oregonstate.edu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
+}
