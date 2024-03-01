@@ -9,18 +9,38 @@ PORT        = 65412;                 // Set a port number at the top so it's eas
 // Database
 var db = require('./db-connector')
 
+const path = require('path'); 
 
 // Serve static files from the frontend directory
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/index.html')); 
+});
 
-/*
-    ROUTES
-*/
-app.get('/', function(req, res)
-    {
-        res.sendFile(path.join(__dirname, 'frontend/pages/index.html'));
-    });
+app.get('/deliveries', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/pages/deliveries.html'));
+});
+
+app.get('/dishes', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/pages/dishes.html'));
+});
+
+app.get('/ingredients', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/pages/ingredients.html'));
+});
+
+app.get('/menus', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/pages/menus.html'));
+});
+
+app.get('/restaurants', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/pages/restaurants.html'));
+});
+
+app.get('/suppliers', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/pages/suppliers.html'));
+});
 
 /*
     LISTENER
