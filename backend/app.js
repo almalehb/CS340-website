@@ -3,8 +3,8 @@
 */
 // Express
 var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 65412;                 // Set a port number at the top so it's easy to change in the future
+var app = express();            // We need to instantiate an express object to interact with the server in our code
+PORT = 65412;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./db-connector')
@@ -12,13 +12,13 @@ var db = require('./db-connector')
 // body parser
 app.use(express.urlencoded({ extended: true }));
 
-const path = require('path'); 
+const path = require('path');
 
 // Serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/index.html')); 
+    res.sendFile(path.join(__dirname, 'frontend/index.html'));
 });
 
 app.get('/deliveries', (req, res) => {
@@ -48,7 +48,7 @@ app.get('/suppliers', (req, res) => {
 /*
     LISTENER
 */
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function () {            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
 
@@ -60,22 +60,22 @@ app.get('/api/dishes', (req, res) => {
             res.status(500).send("Error fetching dishes");
         } else {
             console.log("received results ")
-            res.json(results); 
+            res.json(results);
         }
     });
 });
 
 // CREATE 
 app.post('/api/dishes', (req, res) => {
-    const dishName = req.body.name;  
-    const dishType = req.body.type; 
+    const dishName = req.body.name;
+    const dishType = req.body.type;
 
     console.log('Received POST request to /api/dishes', req.body);
-    console.log('dishName:', dishName); 
+    console.log('dishName:', dishName);
     console.log('dishType:', dishType);
 
-    db.pool.query('INSERT INTO Dishes (dishName, dishType) VALUES (?, ?)', 
-        [dishName, dishType], 
+    db.pool.query('INSERT INTO Dishes (dishName, dishType) VALUES (?, ?)',
+        [dishName, dishType],
         (err, result) => {
             if (err) {
                 console.error("Error adding dish:", err);
@@ -84,7 +84,7 @@ app.post('/api/dishes', (req, res) => {
                 console.log('Dish added successfully with ID:', result.insertId);
                 res.status(201).json({ dishId: result.insertId });
             }
-    });
+        });
 });
 
 // UPDATE 
@@ -100,7 +100,7 @@ app.delete('/api/dishes/:dishId', (req, res) => {
         if (err) {
             res.status(500).send("Error deleting dish");
         } else if (result.affectedRows === 0) {
-            res.status(404).send("Dish not found"); 
+            res.status(404).send("Dish not found");
         } else {
             res.sendStatus(200);
         }
