@@ -43,91 +43,9 @@
                             <button>Delete</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Empanadas</td>
-                        <td>Entree</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Chicken Fingers</td>
-                        <td>Entree</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Chicken Fries</td>
-                        <td>Appetizer</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Mozzarella Sticks</td>
-                        <td>Appetizer</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Popcorn Shrimp</td>
-                        <td>Appetizer</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Cheese Cake</td>
-                        <td>Dessert</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Vanilla Ice Cream</td>
-                        <td>Dessert</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Mojito</td>
-                        <td>Drink</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Margarita</td>
-                        <td>Drink</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    
                 </tbody>
             </table>
-            <form method="POST" action="/add-dish" style="margin-top: 20px;">
+            <form method="POST" action="/api/dishes" style="margin-top: 20px;">
                 <fieldset>
                     <legend><strong>Add New Dish</strong></legend>
                     <label for="name">Dish Name:</label>
@@ -137,7 +55,7 @@
                     <input type="text" id="type" name="type" required>
 
                     <label for="ingredients">Ingredients:</label>
-                    <select id="ingredients" name="ingredients[]" multiple="multiple" required>
+                    <select id="ingredients" name="ingredients" multiple="multiple" required>
                         <option value="ingredientId1">Oxaca Cheese</option>
                         <option value="ingredientId2">Chicken</option>
                         <option value="ingredientId2">Tequila</option>
@@ -218,5 +136,6 @@
     <footer>
         <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
     </footer>
+<script src="dishes.js"></script>
 </body>
 </html>
