@@ -1,5 +1,5 @@
 /*
-    SETUP for a simple web app (as part of Activity 2)
+    SETUP for a simple web app
 */
 // Express
 var express = require('express');   // We are using the express library for the web server
@@ -55,11 +55,23 @@ app.listen(PORT, function () {            // This is the basic syntax for what i
 // CRUD for Dishes
 // READ 
 app.get('/api/dishes', (req, res) => {
-    db.pool.query('SELECT * FROM Dishes', (err, results) => {
+    const query = `
+        SELECT Dishes.dishId, 
+        Dishes.dishName,
+        Ingredients.ingredientName AS 'main ingredient',
+        Dishes.dishType
+    FROM Dishes
+    LEFT JOIN DishIngredients ON Dishes.dishId = DishIngredients.dishId
+    LEFT JOIN Ingredients ON DishIngredients.ingredientId = Ingredients.ingredientId;
+    `;
+    // TODO: replace LEFT JOIN with INNER JOIN once we have the intersection table updating properly on insert
+
+    db.pool.query(query, (err, results) => {
         if (err) {
+            console.error("Error adding dish:", err);
             res.status(500).send("Error fetching dishes");
         } else {
-            console.log("received results ")
+            console.log('Dish fetched results', results);
             res.json(results);
         }
     });
