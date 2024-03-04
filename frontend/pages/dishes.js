@@ -22,10 +22,11 @@ function renderDishesTable(dishes) {
         nameCell.textContent = dish.dishName;
         typeCell.textContent = dish.dishType;
 
-        // our edit button (not yet functional)
+        // our edit button
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
-        editButton.addEventListener('click', () => editDish(dish.dishId));
+        editButton.classList.add('edit-btn');
+        editButton.addEventListener('click', () => editRow(row));
 
         // our delete button
         const deleteButton = document.createElement('button');
@@ -66,10 +67,26 @@ function addDish() {
         .catch(error => console.error('Error adding dish:', error));
 }
 
+function editDish(editedData) {
+    const dishId = editedData.dishId; // getting id from data
 
+    const data = `name=${encodeURIComponent(editedData.dishName)}&type=${encodeURIComponent(editedData.dishType)}`;
 
-function editDish(dishId) {
-    // TODO: implement edit functionality
+    fetch(`/api/dishes/${dishId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Dish updated successfully');
+                // let's refresh the list to show the new value!
+                fetchDishes();
+            } else {
+                console.error('Error updating dish:', response.statusText);
+            }
+        })
+        .catch(error => console.error('Error updating dish:', error));
 }
 
 function deleteDish(dishId) {
@@ -95,3 +112,29 @@ document.querySelector('form').addEventListener('submit', (event) => {
     addDish();
 });
 
+function editRow(row) {
+    const cells = row.querySelectorAll('td.editable');
+    const editButton = row.querySelector('.edit-btn');
+
+    if (editButton.textContent === 'Edit') {
+        cells.forEach(cell => {
+            const originalContent = cell.textContent;
+            const inputType = cell.dataset.label === 'ID' ? 'number' : 'text'; 
+
+            cell.innerHTML = `<input type="${inputType}" value="${originalContent}" />`;
+        });
+        editButton.textContent = 'Confirm Edit';
+    } else {
+        cells.forEach(cell => {
+            const input = cell.querySelector('input');
+            cell.textContent = input.value; 
+            // Update: Collect data to send to editDish
+            const editedData = { 
+                dishId: row.cells[0].textContent, // Assuming ID is in the first cell 
+                // ... gather other edited data similarly 
+            };
+            editDish(editedData); // Pass data to your editDish function
+        });
+        editButton.textContent = 'Edit'; 
+    }
+}
