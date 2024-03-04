@@ -113,38 +113,32 @@ document.querySelector('form').addEventListener('submit', (event) => {
 });
 
 function editRow(row) {
-    const cells = row.querySelectorAll('td'); 
+    const cells = row.querySelectorAll('td');
     const editButton = row.querySelector('.edit-btn');
 
-    editButton.addEventListener('click', (event) => {
-        // I added these two lines to avoid firing off multiple edits simultaneously
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (editButton.textContent === 'Edit') {
-            for (let i = 0; i < cells.length - 1; i++) { 
-                const cell = cells[i];
-                const originalContent = cell.textContent;
-                const inputType = i === 0 ? 'number' : 'text'; 
-                cell.innerHTML = `<input type="${inputType}" value="${originalContent}" />`;
-            }
-            editButton.textContent = 'Confirm Edit';
-        } else {
-            for (let i = 0; i < cells.length - 1; i++) {
-                const cell = cells[i];
-                const input = cell.querySelector('input');
-                cell.textContent = input.value; 
-            }
-
-            const editedData = {
-                dishId: row.cells[0].textContent, 
-                dishName: row.cells[1].textContent,
-                dishType: row.cells[2].textContent 
-            };
-
-            editDish(editedData); 
-
-            editButton.textContent = 'Edit';
+    if (editButton.textContent === 'Edit') {
+        for (let i = 0; i < cells.length - 1; i++) {
+            const cell = cells[i];
+            const originalContent = cell.textContent;
+            const inputType = i === 0 ? 'number' : 'text';
+            cell.innerHTML = `<input type="${inputType}" value="${originalContent}" />`;
         }
-    });
+        editButton.textContent = 'Confirm Edit';
+    } else {
+        for (let i = 0; i < cells.length - 1; i++) {
+            const cell = cells[i];
+            const input = cell.querySelector('input');
+            cell.textContent = input.value;
+        }
+
+        const editedData = {
+            dishId: row.cells[0].textContent,
+            dishName: row.cells[1].textContent,
+            dishType: row.cells[2].textContent
+        };
+
+        editDish(editedData);
+
+        editButton.textContent = 'Edit';
+    }
 }
