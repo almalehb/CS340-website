@@ -101,7 +101,21 @@ app.post('/api/dishes', (req, res) => {
 
 // UPDATE 
 app.put('/api/dishes/:dishId', (req, res) => {
-    // TODO
+    const { dishId } = req.params;
+    const { name: dishName, type: dishType } = req.body;
+
+    const query = 'UPDATE Dishes SET dishName = ?, dishType = ? WHERE dishId = ?';
+    db.pool.query(query, [dishName, dishType, dishId], (err, result) => {
+        if (err) {
+            console.error('Error updating dish:', err);
+            res.status(500).send('Error updating dish');
+        } else if (result.affectedRows === 0) {
+            res.status(404).send('Dish not found');
+        } else {
+            console.log('Dish updated successfully');
+            res.sendStatus(200);
+        }
+    });
 });
 
 // DELETE 

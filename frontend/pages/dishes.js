@@ -113,28 +113,38 @@ document.querySelector('form').addEventListener('submit', (event) => {
 });
 
 function editRow(row) {
-    const cells = row.querySelectorAll('td.editable');
+    const cells = row.querySelectorAll('td'); 
     const editButton = row.querySelector('.edit-btn');
 
-    if (editButton.textContent === 'Edit') {
-        cells.forEach(cell => {
-            const originalContent = cell.textContent;
-            const inputType = cell.dataset.label === 'ID' ? 'number' : 'text'; 
+    editButton.addEventListener('click', (event) => {
+        // I added these two lines to avoid firing off multiple edits simultaneously
+        event.preventDefault();
+        event.stopPropagation();
 
-            cell.innerHTML = `<input type="${inputType}" value="${originalContent}" />`;
-        });
-        editButton.textContent = 'Confirm Edit';
-    } else {
-        cells.forEach(cell => {
-            const input = cell.querySelector('input');
-            cell.textContent = input.value; 
-            // Update: Collect data to send to editDish
-            const editedData = { 
-                dishId: row.cells[0].textContent, // Assuming ID is in the first cell 
-                // ... gather other edited data similarly 
+        if (editButton.textContent === 'Edit') {
+            for (let i = 0; i < cells.length - 1; i++) { 
+                const cell = cells[i];
+                const originalContent = cell.textContent;
+                const inputType = i === 0 ? 'number' : 'text'; 
+                cell.innerHTML = `<input type="${inputType}" value="${originalContent}" />`;
+            }
+            editButton.textContent = 'Confirm Edit';
+        } else {
+            for (let i = 0; i < cells.length - 1; i++) {
+                const cell = cells[i];
+                const input = cell.querySelector('input');
+                cell.textContent = input.value; 
+            }
+
+            const editedData = {
+                dishId: row.cells[0].textContent, 
+                dishName: row.cells[1].textContent,
+                dishType: row.cells[2].textContent 
             };
-            editDish(editedData); // Pass data to your editDish function
-        });
-        editButton.textContent = 'Edit'; 
-    }
+
+            editDish(editedData); 
+
+            editButton.textContent = 'Edit';
+        }
+    });
 }
