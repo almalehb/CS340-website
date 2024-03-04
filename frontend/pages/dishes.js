@@ -117,7 +117,7 @@ function editRow(row) {
     const editButton = row.querySelector('.edit-btn');
 
     if (editButton.textContent === 'Edit') {
-        for (let i = 0; i < cells.length - 1; i++) {
+        for (let i = 1; i < cells.length - 1; i++) { // skipping ID cell and button cell
             const cell = cells[i];
             const originalContent = cell.textContent;
             const inputType = i === 0 ? 'number' : 'text';
@@ -125,7 +125,7 @@ function editRow(row) {
         }
         editButton.textContent = 'Confirm Edit';
     } else {
-        for (let i = 0; i < cells.length - 1; i++) {
+        for (let i = 1; i < cells.length - 1; i++) {
             const cell = cells[i];
             const input = cell.querySelector('input');
             cell.textContent = input.value;
