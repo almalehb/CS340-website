@@ -57,7 +57,91 @@ app.listen(PORT, function () {
   );
 });
 
-// CRUD for Dishes
+// CRUD for Restaurants ----------------------------------------------------------------------------------------
+// READ
+app.get("/api/restaurants", (req, res) => {
+  const query = `
+        SELECT Restaurants.restaurantId,
+        Restaurants.location,
+        Restaurants.managerName AS 'manager name',
+    FROM Restaurants
+    `;
+
+  db.pool.query(query, (err, results) => {
+    if (err) {
+      console.error("Error retrieving restaurant: ", err);
+      res.status(500).send("Error fetching restaurants");
+    } else {
+      console.log("Restaurant fetched results", results);
+      res.json(results);
+    }
+  });
+});
+
+// CREATE
+app.post("/api/restaurants", (req, res) => {
+  const location = req.body.location;
+  const managerName = req.body.name;
+
+  console.log("Received POST request to /api/restaurants", req.body);
+  console.log("location:", location);
+  console.log("managerName:", managerName);
+
+  db.pool.query(
+    "INSERT INTO Restaurants (location, mangerName) VALUES (?, ?)",
+    [location, managerName],
+    (err, result) => {
+      if (err) {
+        console.error("Error adding restaurant:", err);
+        res.status(500).send("Error adding restaurant");
+      } else {
+        console.log("Restaurant added successfully with ID:", result.insertId);
+        res.status(201).json({ restaurantId: result.insertId });
+      }
+    }
+  );
+});
+
+// UPDATE
+app.put("/api/restaurants/:restaurantId", (req, res) => {
+  const { restaurantId } = req.params;
+  const { location: location, name: managerName } = req.body;
+
+  const query =
+    "UPDATE Restaurants SET location = ?, managerName = ? WHERE restaurantId = ?";
+  db.pool.query(query, [location, managerName, restaurantId], (err, result) => {
+    if (err) {
+      console.error("Error updating restaurant:", err);
+      res.status(500).send("Error updating restaurant");
+    } else if (result.affectedRows === 0) {
+      res.status(404).send("Restaurant not found");
+    } else {
+      console.log("Restaurant updated successfully");
+      res.sendStatus(200);
+    }
+  });
+});
+
+// DELETE
+app.delete("/api/restaurants/:restaurantId", (req, res) => {
+  const { restaurantId } = req.params;
+
+  db.pool.query(
+    "DELETE FROM Restaurants WHERE restaurantId = ?",
+    [restaurantId],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting restaurant");
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Restaurant not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// CRUD for Dishes ---------------------------------------------------------------------------------------------
 // READ
 app.get("/api/dishes", (req, res) => {
   const query = `
@@ -106,7 +190,6 @@ app.post("/api/dishes", (req, res) => {
   );
 });
 
-<<<<<<< HEAD
 // UPDATE
 app.put("/api/dishes/:dishId", (req, res) => {
   const { dishId } = req.params;
@@ -124,25 +207,6 @@ app.put("/api/dishes/:dishId", (req, res) => {
       res.sendStatus(200);
     }
   });
-=======
-// UPDATE 
-app.put('/api/dishes/:dishId', (req, res) => {
-    const { dishId } = req.params;
-    const { name: dishName, type: dishType } = req.body;
-
-    const query = 'UPDATE Dishes SET dishName = ?, dishType = ? WHERE dishId = ?';
-    db.pool.query(query, [dishName, dishType, dishId], (err, result) => {
-        if (err) {
-            console.error('Error updating dish:', err);
-            res.status(500).send('Error updating dish');
-        } else if (result.affectedRows === 0) {
-            res.status(404).send('Dish not found');
-        } else {
-            console.log('Dish updated successfully');
-            res.sendStatus(200);
-        }
-    });
->>>>>>> main
 });
 
 // DELETE
@@ -157,6 +221,102 @@ app.delete("/api/dishes/:dishId", (req, res) => {
         res.status(500).send("Error deleting dish");
       } else if (result.affectedRows === 0) {
         res.status(404).send("Dish not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// CRUD for Ingredients ----------------------------------------------------------------------------------------
+// READ
+app.get("/api/ingredients", (req, res) => {
+  const query = `
+        SELECT Ingredients.ingredientId, 
+               Ingredients.ingredientName,
+               Ingredients.ingredientType,
+               Ingredients.amountOrdered,
+               Ingredients.totalCost
+        FROM Ingredients 
+    `;
+
+  db.pool.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching ingredients:", err);
+      res
+        .status(500)
+        .json({ error: "Error fetching ingredients from database" });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+// CREATE
+app.post("/api/ingredients", (req, res) => {
+  const { ingredientName, ingredientType, amountOrdered, totalCost } = req.body;
+
+  const query =
+    "INSERT INTO Ingredients (ingredientName, ingredientType, amountOrdered, totalCost) VALUES (?, ?, ?, ?)";
+  db.pool.query(
+    query,
+    [ingredientName, ingredientType, amountOrdered, totalCost],
+    (err, result) => {
+      if (err) {
+        console.error("Error adding ingredient:", err);
+        res.status(500).json({ error: "Error adding ingredient to database" });
+      } else {
+        res.status(201).json({ ingredientId: result.insertId });
+      }
+    }
+  );
+});
+
+// UPDATE
+app.put("/api/ingredients/:ingredientId", (req, res) => {
+  const { ingredientId } = req.params;
+  const {
+    name: ingredientName,
+    type: ingredientType,
+    amount: amountOrdered,
+    cost: totalCost,
+  } = req.body;
+
+  const query =
+    "UPDATE Ingredients SET ingredientName = ?, ingredientType = ?, amountOrdered = ?, totalCost = ? WHERE ingredientId = ?";
+  db.pool.query(
+    query,
+    [ingredientName, ingredientType, amountOrdered, totalCost, ingredientId],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating ingredient:", err);
+        res
+          .status(500)
+          .json({ error: "Error updating ingredient in database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Ingredient not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// DELETE
+app.delete("/api/ingredients/:ingredientId", (req, res) => {
+  const { ingredientId } = req.params;
+
+  db.pool.query(
+    "DELETE FROM Ingredients WHERE ingredientId = ?",
+    [ingredientId],
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting ingredient:", err);
+        res
+          .status(500)
+          .json({ error: "Error deleting ingredient from database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Ingredient not found");
       } else {
         res.sendStatus(200);
       }

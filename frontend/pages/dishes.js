@@ -141,8 +141,4 @@ function editRow(row) {
 
         editButton.textContent = 'Edit';
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main
