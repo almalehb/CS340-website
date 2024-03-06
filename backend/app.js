@@ -6,9 +6,6 @@ var express = require("express"); // We are using the express library for the we
 var app = express(); // We need to instantiate an express object to interact with the server in our code
 PORT = 65412; // Set a port number at the top so it's easy to change in the future
 
-// For handling JSON body parsing
-app.use(express.json())
-
 // Database
 var db = require("./db-connector");
 
@@ -112,19 +109,18 @@ app.post("/api/dishes", (req, res) => {
 // UPDATE
 app.put("/api/dishes/:dishId", (req, res) => {
   const { dishId } = req.params;
-  const dishName = req.body.name;
-  const dishType = req.body.type;
+  const { name: dishName, type: dishType } = req.body;
 
-  // SQL statement for updating a dish
   const query = "UPDATE Dishes SET dishName = ?, dishType = ? WHERE dishId = ?";
-
   db.pool.query(query, [dishName, dishType, dishId], (err, result) => {
     if (err) {
       console.error("Error updating dish:", err);
       res.status(500).send("Error updating dish");
+    } else if (result.affectedRows === 0) {
+      res.status(404).send("Dish not found");
     } else {
-      console.log(`Dish ${dishId} updated successfully.`);
-      res.status(200).json({ dishId: result.insertId });
+      console.log("Dish updated successfully");
+      res.sendStatus(200);
     }
   });
 });
