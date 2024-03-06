@@ -61,10 +61,10 @@ app.listen(PORT, function () {
 // READ
 app.get("/api/restaurants", (req, res) => {
   const query = `
-        SELECT Restaurants.restaurantId,
-        Restaurants.location,
-        Restaurants.managerName AS 'manager name',
-    FROM Restaurants
+    SELECT Restaurants.restaurantId, Suppliers.supplierId, Restaurants.location AS RestaurantLocation, Suppliers.suppName AS Supplier 
+    FROM Restaurants 
+    INNER JOIN RestaurantSuppliers ON Restaurants.restaurantId = RestaurantSuppliers.restaurantId 
+    INNER JOIN Suppliers ON RestaurantSuppliers.supplierId = Suppliers.supplierId
     `;
 
   db.pool.query(query, (err, results) => {
@@ -81,7 +81,7 @@ app.get("/api/restaurants", (req, res) => {
 // CREATE
 app.post("/api/restaurants", (req, res) => {
   const location = req.body.location;
-  const managerName = req.body.name;
+  const managerName = req.body.manager;
 
   console.log("Received POST request to /api/restaurants", req.body);
   console.log("location:", location);
