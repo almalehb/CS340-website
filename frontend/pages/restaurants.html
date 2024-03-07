@@ -1,115 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Restaurants</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <h1>Our Restaurants</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="restaurants.html">Restaurants</a></li>
-                <li><a href="menus.html">Menus</a></li>
-                <li><a href="dishes.html">Dishes</a></li>
-                <li><a href="ingredients.html">Ingredients</a></li>
-                <li><a href="suppliers.html">Suppliers</a></li>
-                <li><a href="deliveries.html">Deliveries</a></li>
-            </ul>
-        </nav>
+      <h1>Our Restaurants</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="restaurants.html">Restaurants</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="dishes.html">Dishes</a></li>
+          <li><a href="ingredients.html">Ingredients</a></li>
+          <li><a href="suppliers.html">Suppliers</a></li>
+          <li><a href="deliveries.html">Deliveries</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <section>
-            <h2>List of Restaurants</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Location</th>
-                        <th>Manager</th>
-                        <th>Operations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
-                    <tr>
-                        <td>1</td>
-                        <td>154 Saint Street, Manhattan, NY 10016</td>
-                        <td>Kevin Bacon</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-                    <tr>
-                        <td>2</td>
-                        <td>65 King Avenue, Astoria, NY 10054</td>
-                        <td>Maria Campbell</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>14 Elephant Lane, Los Angeles, CA 90008</td>
-                        <td>Jose Guiverra</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <form method="POST" action="/api/restaurants" style="margin-top: 20px;">
-                <fieldset>
-                    <legend><strong>Add New Restaurant</strong></legend>
-                    <label for="id">Restaurant ID:</label>
-                    <input type="text" id="id" name="id" required>
-                    
-                    <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" required>
-                    
-                    <label for="manager">Manager:</label>
-                    <input type="text" id="manager" name="manager" required>
+      <section>
+        <h2>List of Restaurants</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>RID</th>
+              <th>Location</th>
+              <th>Manager</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
+            <tr>
+              <td>1</td>
+              <td>154 Saint Street, Manhattan, NY 10016</td>
+              <td>Kevin Bacon</td>
+              <td>
+                <button>Edit</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <form method="POST" action="/api/restaurants" style="margin-top: 20px">
+          <fieldset>
+            <legend><strong>Add New Restaurant</strong></legend>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required />
 
-                    <label for="supplierID">Supplier ID:</label>
-                    <input type="text" id="supplierID" name="supplierID" required>
-                    
-                    <input type="submit" value="Add Restaurant">
-                </fieldset>
-            </form>
-        </section>
-        <!-- <section>
-            <h2>Restaurant Suppliers</h2>
-            <details>
-                <summary>Kevin Bacon - Restaurant ID: 1</summary>
-                <ul>
-                    <li>Jeffs Veges - Supplier ID: 1</li>
-                    <li>Carne Street - Supplier ID: 2</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Maria Campbell - Restaurant ID: 2</summary>
-                <ul>
-                    <li>SeaFeed - Supplier ID: 3</li>
-                    <li>Farming Pros - Supplier ID: 4</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Jose Guiverra - Restaurant ID: 3</summary>
-                <ul>
-                    <li>Jeffs Veges - Supplier ID: 1</li>
-                    <li>Ice Temple - Supplier ID: 5</li>
-                </ul>
-            </details>
-        </section> -->
+            <label for="manager">Manager:</label>
+            <input type="text" id="manager" name="manager" required />
+            <input type="submit" value="Add Restaurant" />
+          </fieldset>
+        </form>
+      </section>
+      <section>
+        <h2>Restaurant Suppliers</h2>
+        <details>
+          <summary>Kevin Bacon - Restaurant ID: 1</summary>
+          <ul>
+            <li>Jeffs Veges - Supplier ID: 1</li>
+            <li>Carne Street - Supplier ID: 2</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Maria Campbell - Restaurant ID: 2</summary>
+          <ul>
+            <li>SeaFeed - Supplier ID: 3</li>
+            <li>Farming Pros - Supplier ID: 4</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Jose Guiverra - Restaurant ID: 3</summary>
+          <ul>
+            <li>Jeffs Veges - Supplier ID: 1</li>
+            <li>Ice Temple - Supplier ID: 5</li>
+          </ul>
+        </details>
+      </section>
     </main>
     <footer>
-        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+      <p>
+        Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
+        541-711-1511
+      </p>
     </footer>
-</body>
+    <script src="restaurants.js"></script>
+  </body>
 </html>

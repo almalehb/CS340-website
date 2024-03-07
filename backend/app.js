@@ -61,18 +61,19 @@ app.listen(PORT, function () {
 // READ
 app.get("/api/restaurants", (req, res) => {
   const query = `
-    SELECT Restaurants.restaurantId, Suppliers.supplierId, Restaurants.location AS RestaurantLocation, Suppliers.suppName AS Supplier 
-    FROM Restaurants 
-    INNER JOIN RestaurantSuppliers ON Restaurants.restaurantId = RestaurantSuppliers.restaurantId 
-    INNER JOIN Suppliers ON RestaurantSuppliers.supplierId = Suppliers.supplierId
+      SELECT Restaurants.restaurantId, 
+        Restaurants.location, 
+        Restaurants.managerName 
+      FROM Restaurants
     `;
 
   db.pool.query(query, (err, results) => {
     if (err) {
-      console.error("Error retrieving restaurant: ", err);
-      res.status(500).send("Error fetching restaurants");
+      console.error("Error fetching ingredients:", err);
+      res
+        .status(500)
+        .json({ error: "Error fetching restaurants from database" });
     } else {
-      console.log("Restaurant fetched results", results);
       res.json(results);
     }
   });
@@ -88,12 +89,12 @@ app.post("/api/restaurants", (req, res) => {
   console.log("managerName:", managerName);
 
   db.pool.query(
-    "INSERT INTO Restaurants (location, mangerName) VALUES (?, ?)",
+    "INSERT INTO Restaurants (location, managerName) VALUES (?, ?)",
     [location, managerName],
     (err, result) => {
       if (err) {
-        console.error("Error adding restaurant:", err);
-        res.status(500).send("Error adding restaurant");
+        console.error("Error adding restaurant from app.js:", err);
+        res.status(500).send("Error adding restaurant from app.js");
       } else {
         console.log("Restaurant added successfully with ID:", result.insertId);
         res.status(201).json({ restaurantId: result.insertId });
@@ -105,18 +106,17 @@ app.post("/api/restaurants", (req, res) => {
 // UPDATE
 app.put("/api/restaurants/:restaurantId", (req, res) => {
   const { restaurantId } = req.params;
-  const { location: location, name: managerName } = req.body;
+  const { location: location, manager: managerName } = req.body;
 
   const query =
     "UPDATE Restaurants SET location = ?, managerName = ? WHERE restaurantId = ?";
   db.pool.query(query, [location, managerName, restaurantId], (err, result) => {
     if (err) {
       console.error("Error updating restaurant:", err);
-      res.status(500).send("Error updating restaurant");
+      res.status(500).json({ error: "Error updating restaurant in database" });
     } else if (result.affectedRows === 0) {
       res.status(404).send("Restaurant not found");
     } else {
-      console.log("Restaurant updated successfully");
       res.sendStatus(200);
     }
   });
@@ -131,7 +131,10 @@ app.delete("/api/restaurants/:restaurantId", (req, res) => {
     [restaurantId],
     (err, result) => {
       if (err) {
-        res.status(500).send("Error deleting restaurant");
+        console.error("Error deleting restaurant:", err);
+        res
+          .status(500)
+          .json({ error: "Error deleting restaurant from database" });
       } else if (result.affectedRows === 0) {
         res.status(404).send("Restaurant not found");
       } else {
