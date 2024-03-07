@@ -13,13 +13,13 @@ function renderSuppliersTable(suppliers) {
   suppliers.forEach((supplier) => {
     const row = suppliersTableBody.insertRow();
     const idCell = row.insertCell();
-    const nameCell = row.insertCell();
+    const supplierNameCell = row.insertCell();
     const contactCell = row.insertCell();
     const specialtyCell = row.insertCell();
     const operationsCell = row.insertCell();
 
     idCell.textContent = supplier.supplierId;
-    nameCell.textContent = supplier.suppName;
+    supplierNameCell.textContent = supplier.supplierName;
     contactCell.textContent = supplier.contactInfo;
     specialtyCell.textContent = supplier.specialty;
 
@@ -40,12 +40,12 @@ function renderSuppliersTable(suppliers) {
 }
 
 function addSupplier() {
-  const suppNameInput = document.getElementById("suppName");
+  const supplierNameInput = document.getElementById("supplierName");
   const contactInfoInput = document.getElementById("contactInfo");
   const specialtyInput = document.getElementById("specialty");
 
-  const data = `suppName=${encodeURIComponent(
-    suppNameInput.value
+  const data = `supplierName=${encodeURIComponent(
+    supplierNameInput.value
   )}&contactInfo=${encodeURIComponent(
     contactInfoInput.value
   )}&specialty=${encodeURIComponent(specialtyInput.value)}`;
@@ -57,7 +57,7 @@ function addSupplier() {
   })
     .then((response) => {
       if (response.ok) {
-        suppNameInput.value = "";
+        supplierNameInput.value = "";
         contactInfoInput.value = "";
         specialtyInput.value = "";
         fetchSuppliers();
@@ -77,8 +77,8 @@ document.querySelector("form").addEventListener("submit", (event) => {
 function editSupplier(editedData) {
   const supplierId = editedData.supplierId;
 
-  const data = `suppName=${encodeURIComponent(
-    editedData.suppName
+  const data = `supplierName=${encodeURIComponent(
+    editedData.supplierName
   )}&contactInfo=${encodeURIComponent(
     editedData.contactInfo
   )}&specialty=${encodeURIComponent(editedData.specialty)}`;
@@ -90,6 +90,7 @@ function editSupplier(editedData) {
   })
     .then((response) => {
       if (response.ok) {
+        console.log("Supplier updated successfully");
         fetchSuppliers();
       } else {
         console.error("Error updating supplier:", response.statusText);
@@ -101,21 +102,32 @@ function editSupplier(editedData) {
 function editRow(row) {
   const cells = row.querySelectorAll("td");
   const editButton = row.querySelector(".edit-btn");
-  const supplierId = cells[0].textContent;
 
   if (editButton.textContent === "Edit") {
-    cells[1].innerHTML = `<input type='text' value='${cells[1].textContent}' />`;
-    cells[2].innerHTML = `<input type='text' value='${cells[2].textContent}' />`;
-    cells[3].innerHTML = `<input type='text' value='${cells[3].textContent}' />`;
+    for (let i = 1; i < cells.length - 1; i++) {
+      // skipping ID cell and button cell
+      const cell = cells[i];
+      const originalContent = cell.textContent;
+      const inputType = i === 0 ? "number" : "text";
+      cell.innerHTML = `<input type="${inputType}" value="${originalContent}" />`;
+    }
     editButton.textContent = "Confirm Edit";
   } else {
+    for (let i = 1; i < cells.length - 1; i++) {
+      const cell = cells[i];
+      const input = cell.querySelector("input");
+      cell.textContent = input.value;
+    }
+
     const editedData = {
-      suppName: cells[1].querySelector("input").value,
-      contactInfo: cells[2].querySelector("input").value,
-      specialty: cells[3].querySelector("input").value,
+      supplierId: row.cells[0].textContent,
+      supplierName: row.cells[1].textContent,
+      contactInfo: row.cells[2].textContent,
+      specialty: row.cells[3].textContent,
     };
 
-    editSupplier(supplierId, editedData);
+    editSupplier(editedData);
+
     editButton.textContent = "Edit";
   }
 }

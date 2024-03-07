@@ -69,7 +69,7 @@ app.get("/api/restaurants", (req, res) => {
 
   db.pool.query(query, (err, results) => {
     if (err) {
-      console.error("Error fetching ingredients:", err);
+      console.error("Error fetching restaurants:", err);
       res
         .status(500)
         .json({ error: "Error fetching restaurants from database" });
@@ -396,6 +396,102 @@ app.delete("/api/menus/:menuId", (req, res) => {
         res.status(500).json({ error: "Error deleting menu from database" });
       } else if (result.affectedRows === 0) {
         res.status(404).send("Menu not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// CRUD for Suppliers ----------------------------------------------------------------------------------------
+// READ
+app.get("/api/suppliers", (req, res) => {
+  const query = `
+      SELECT Suppliers.supplierId,
+        Suppliers.supplierName, 
+        Suppliers.contactInfo,
+        Suppliers.specialty 
+      FROM Suppliers
+    `;
+
+  db.pool.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching suppliers:", err);
+      res.status(500).json({ error: "Error fetching suppliers from database" });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+// CREATE
+app.post("/api/suppliers", (req, res) => {
+  const supplierName = req.body.supplierName;
+  const contactInfo = req.body.contactInfo;
+  const specialty = req.body.specialty;
+
+  console.log("Received POST request to /api/suppliers", req.body);
+  console.log("supplierName:", supplierName);
+  console.log("contactInfo:", contactInfo);
+  console.log("specialty:", specialty);
+
+  db.pool.query(
+    "INSERT INTO Suppliers (supplierName, contactInfo, specialty) VALUES (?, ?, ?)",
+    [supplierName, contactInfo, specialty],
+    (err, result) => {
+      if (err) {
+        console.error("Error adding supplier from app.js:", err);
+        res.status(500).send("Error adding supplier from app.js");
+      } else {
+        console.log("Supplier added successfully with ID:", result.insertId);
+        res.status(201).json({ supplierId: result.insertId });
+      }
+    }
+  );
+});
+
+// UPDATE
+app.put("/api/suppliers/:supplierId", (req, res) => {
+  const { supplierId } = req.params;
+  const {
+    supplierName: supplierName,
+    contactInfo: contactInfo,
+    specialty: specialty,
+  } = req.body;
+
+  const query =
+    "UPDATE Suppliers SET supplierName = ?, contactInfo = ?, specialty = ? WHERE supplierId = ?";
+  db.pool.query(
+    query,
+    [supplierName, contactInfo, specialty, supplierId],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating supplier:", err);
+        res.status(500).json({ error: "Error updating supplier in database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Supplier not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// DELETE
+app.delete("/api/suppliers/:supplierId", (req, res) => {
+  const { supplierId } = req.params;
+
+  db.pool.query(
+    "DELETE FROM Suppliers WHERE supplierId = ?",
+    [supplierId],
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting supplier:", err);
+        res
+          .status(500)
+          .json({ error: "Error deleting supplier from database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Supplier not found");
       } else {
         res.sendStatus(200);
       }
