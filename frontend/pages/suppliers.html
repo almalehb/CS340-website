@@ -1,190 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Suppliers</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <h1>Our Suppliers</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="restaurants.html">Restaurants</a></li>
-                <li><a href="menus.html">Menus</a></li>
-                <li><a href="dishes.html">Dishes</a></li>
-                <li><a href="ingredients.html">Ingredients</a></li>
-                <li><a href="suppliers.html">Suppliers</a></li>
-                <li><a href="deliveries.html">Deliveries</a></li>
-            </ul>
-        </nav>
+      <h1>Our Suppliers</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="restaurants.html">Restaurants</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="dishes.html">Dishes</a></li>
+          <li><a href="ingredients.html">Ingredients</a></li>
+          <li><a href="suppliers.html">Suppliers</a></li>
+          <li><a href="deliveries.html">Deliveries</a></li>
+        </ul>
+      </nav>
     </header>
     <main>
-        <section>
-            <h2>List of Suppliers</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Specialization</th>
-                        <th>Operations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
-                    <tr>
-                        <td>1</td>
-                        <td>Jeffs Veges</td>
-                        <td>915-345-6575</td>
-                        <td>Vegetables</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Carne Street</td>
-                        <td>865-234-2334</td>
-                        <td>Meats</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>SeaFeed</td>
-                        <td>765-176-4545</td>
-                        <td>Seafood</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Farming Pros</td>
-                        <td>980-456-2231</td>
-                        <td>Fruits and Cheese</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Ice Temple</td>
-                        <td>687-222-5555</td>
-                        <td>Ice Cream</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <form method="POST" action="/add-supplier" style="margin-top: 20px;">
-                <fieldset>
-                    <legend><strong>Add New Supplier</strong></legend>
-                    <label for="name">Supplier Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    
-                    <label for="contact">Contact:</label>
-                    <input type="tel" id="contact" name="contact" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required>
-                    
-                    <label for="specialization">Specialization:</label>
-                    <input type="text" id="specialization" name="specialization" required>
-                    
-                    <label for="ingredients">Ingredients:</label>
-                    <select id="ingredients" name="ingredients[]" multiple="multiple" required>
-                        <option value="ingredientId1">Oxaca Cheese</option>
-                        <option value="ingredientId2">Chicken</option>
-                        <option value="ingredientId2">Tequila</option>
-                        <option value="ingredientId2">Shrimp</option>
-                        <option value="ingredientId2">Potatoes</option>
-                        <option value="ingredientId2">Ice Cream</option>
-                    </select>
+      <section>
+        <h2>List of Suppliers</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Specialty</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
+            <tr>
+              <td>1</td>
+              <td>Jeffs Veges</td>
+              <td>915-345-6575</td>
+              <td>Vegetables</td>
+              <td>
+                <button>Edit</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <form method="POST" action="/api/suppliers" style="margin-top: 20px">
+          <fieldset>
+            <legend><strong>Add New Supplier</strong></legend>
+            <label for="suppName">Supplier Name:</label>
+            <input type="text" id="suppName" name="suppName" required />
 
-                    <input type="submit" value="Add Supplier">
-                </fieldset>
-            </form>
-        </section>
-        <section>
-            <h2>Supplier Ingredients</h2>
-            <details>
-                <summary>Jeffs Veges - Vegetables (Supplier ID: 1)</summary>
-                <ul>
-                    <li>Potatoes (Ingredient ID: 5)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Carne Street - Meats (Supplier ID: 2)</summary>
-                <ul>
-                    <li>Chicken (Ingredient ID: 2)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>SeaFeed - Seafood (Supplier ID: 3)</summary>
-                <ul>
-                    <li>Shrimp (Ingredient ID: 4)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Farming Pros - Fruits and Cheese (Supplier ID: 4)</summary>
-                <ul>
-                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Ice Temple - Ice Cream (Supplier ID: 5)</summary>
-                <ul>
-                    <li>Tequila (Ingredient ID: 3)</li>
-                    <li>Ice Cream (Ingredient ID: 6)</li>
-                </ul>
-            </details>
-        </section>
-        <section>
-            <h2>Supplied Restaurants</h2>
-            <details>
-                <summary>Jeffs Veges - Supplier ID: 1</summary>
-                <ul>
-                    <li>Kevin Bacon - Restaurant ID: 1</li>
-                    <li>Jose Guiverra - Restaurant ID: 3</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Carne Street - Supplier ID: 2</summary>
-                <ul>
-                    <li>Kevin Bacon - Restaurant ID: 1</li>
-                </ul>
-            </details>
-            <details>
-                <summary>SeaFeed - Supplier ID: 3</summary>
-                <ul>
-                    <li>Maria Campbell - Restaurant ID: 2</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Farming Pros - Supplier ID: 4</summary>
-                <ul>
-                    <li>Maria Campbell - Restaurant ID: 2</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Ice Temple - Supplier ID: 5</summary>
-                <ul>
-                    <li>Jose Guiverra - Restaurant ID: 3</li>
-                </ul>
-            </details>
-        </section>
+            <label for="contactInfo">Contact:</label>
+            <input
+              type="tel"
+              id="contactInfo"
+              name="contactInfo"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              placeholder="123-456-7890"
+              required
+            />
+
+            <label for="specialty">Specialization:</label>
+            <input type="text" id="specialty" name="specialty" required />
+
+            <label for="ingredients">Ingredients:</label>
+            <select
+              id="ingredients"
+              name="ingredients[]"
+              multiple="multiple"
+              required
+            >
+              <option value="ingredientId1">Oaxaca Cheese</option>
+              <option value="ingredientId2">Chicken</option>
+              <option value="ingredientId2">Tequila</option>
+              <option value="ingredientId2">Shrimp</option>
+              <option value="ingredientId2">Potatoes</option>
+              <option value="ingredientId2">Ice Cream</option>
+            </select>
+
+            <input type="submit" value="Add Supplier" />
+          </fieldset>
+        </form>
+      </section>
+      <section>
+        <h2>Supplier Ingredients</h2>
+        <details>
+          <summary>Jeffs Veges - Vegetables (Supplier ID: 1)</summary>
+          <ul>
+            <li>Potatoes (Ingredient ID: 5)</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Carne Street - Meats (Supplier ID: 2)</summary>
+          <ul>
+            <li>Chicken (Ingredient ID: 2)</li>
+          </ul>
+        </details>
+        <details>
+          <summary>SeaFeed - Seafood (Supplier ID: 3)</summary>
+          <ul>
+            <li>Shrimp (Ingredient ID: 4)</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Farming Pros - Fruits and Cheese (Supplier ID: 4)</summary>
+          <ul>
+            <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Ice Temple - Ice Cream (Supplier ID: 5)</summary>
+          <ul>
+            <li>Tequila (Ingredient ID: 3)</li>
+            <li>Ice Cream (Ingredient ID: 6)</li>
+          </ul>
+        </details>
+      </section>
+      <section>
+        <h2>Supplied Restaurants</h2>
+        <details>
+          <summary>Jeffs Veges - Supplier ID: 1</summary>
+          <ul>
+            <li>Kevin Bacon - Restaurant ID: 1</li>
+            <li>Jose Guiverra - Restaurant ID: 3</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Carne Street - Supplier ID: 2</summary>
+          <ul>
+            <li>Kevin Bacon - Restaurant ID: 1</li>
+          </ul>
+        </details>
+        <details>
+          <summary>SeaFeed - Supplier ID: 3</summary>
+          <ul>
+            <li>Maria Campbell - Restaurant ID: 2</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Farming Pros - Supplier ID: 4</summary>
+          <ul>
+            <li>Maria Campbell - Restaurant ID: 2</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Ice Temple - Supplier ID: 5</summary>
+          <ul>
+            <li>Jose Guiverra - Restaurant ID: 3</li>
+          </ul>
+        </details>
+      </section>
     </main>
     <footer>
-        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+      <p>
+        Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
+        541-711-1511
+      </p>
     </footer>
-</body>
+    <script src="suppliers.js"></script>
+  </body>
 </html>
-
