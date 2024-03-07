@@ -231,7 +231,7 @@ app.delete("/api/dishes/:dishId", (req, res) => {
   );
 });
 
-// CRUD for Ingredients ----------------------------------------------------------------------------------------
+// CRUD for Ingredients
 // READ
 app.get("/api/ingredients", (req, res) => {
   const query = `
