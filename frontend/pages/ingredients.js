@@ -70,6 +70,12 @@ function addIngredient() {
     .catch((error) => console.error("Error adding ingredient:", error));
 }
 
+// adding listener to the form
+document.querySelector('form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    addIngredient()
+});
+
 function editIngredient(editedData) {
   const ingredientId = editedData.ingredientId;
 
