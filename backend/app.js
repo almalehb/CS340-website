@@ -132,3 +132,78 @@ app.delete('/api/dishes/:dishId', (req, res) => {
         }
     });
 });
+
+// CRUD for Ingredients
+// READ 
+app.get('/api/ingredients', (req, res) => {
+    const query = `
+        SELECT Ingredients.ingredientId, 
+               Ingredients.ingredientName,
+               Ingredients.ingredientType,
+               Ingredients.amountOrdered,
+               Ingredients.totalCost
+        FROM Ingredients 
+    `;
+
+    db.pool.query(query, (err, results) => {
+        if (err) {
+            console.error("Error fetching ingredients:", err);
+            res.status(500).json({ error: "Error fetching ingredients from database" });
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+
+// CREATE 
+app.post('/api/ingredients', (req, res) => {
+    const { ingredientName, ingredientType, amountOrdered, totalCost } = req.body;
+
+    const query = 'INSERT INTO Ingredients (ingredientName, ingredientType, amountOrdered, totalCost) VALUES (?, ?, ?, ?)';
+    db.pool.query(query, [ingredientName, ingredientType, amountOrdered, totalCost], (err, result) => {
+        if (err) {
+            console.error("Error adding ingredient:", err);
+            res.status(500).json({ error: "Error adding ingredient to database" });
+        } else {
+            res.status(201).json({ ingredientId: result.insertId });
+        }
+    });
+});
+
+// UPDATE 
+app.put('/api/ingredients/:ingredientId', (req, res) => {
+    const { ingredientId } = req.params;
+    const { name: ingredientName,
+        type: ingredientType,
+        amount: amountOrdered,
+        cost: totalCost } = req.body;
+
+    const query = 'UPDATE Ingredients SET ingredientName = ?, ingredientType = ?, amountOrdered = ?, totalCost = ? WHERE ingredientId = ?';
+    db.pool.query(query, [ingredientName, ingredientType, amountOrdered, totalCost, ingredientId], (err, result) => {
+        if (err) {
+            console.error('Error updating ingredient:', err);
+            res.status(500).json({ error: "Error updating ingredient in database" });
+        } else if (result.affectedRows === 0) {
+            res.status(404).send('Ingredient not found');
+        } else {
+            res.sendStatus(200);
+        }
+    });
+});
+
+// DELETE 
+app.delete('/api/ingredients/:ingredientId', (req, res) => {
+    const { ingredientId } = req.params;
+
+    db.pool.query('DELETE FROM Ingredients WHERE ingredientId = ?', [ingredientId], (err, result) => {
+        if (err) {
+            console.error('Error deleting ingredient:', err);
+            res.status(500).json({ error: "Error deleting ingredient from database" });
+        } else if (result.affectedRows === 0) {
+            res.status(404).send("Ingredient not found");
+        } else {
+            res.sendStatus(200);
+        }
+    });
+}); 

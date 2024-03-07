@@ -13,7 +13,7 @@
   "author": "almalehb@oregonstate.edu",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.18.3",
     "forever": "^4.0.3",
     "mysql": "^2.18.1"
   }
