@@ -231,7 +231,7 @@ app.delete("/api/dishes/:dishId", (req, res) => {
   );
 });
 
-// CRUD for Ingredients
+// CRUD for Ingredients ----------------------------------------------------------------------------------------
 // READ
 app.get("/api/ingredients", (req, res) => {
   const query = `
@@ -255,21 +255,28 @@ app.get("/api/ingredients", (req, res) => {
   });
 });
 
-// CREATE 
-app.post('/api/ingredients', (req, res) => {
-    const { name: ingredientName,
-        type: ingredientType,
-        amount: amountOrdered,
-        cost: totalCost } = req.body;
-    const query = 'INSERT INTO Ingredients (ingredientName, ingredientType, amountOrdered, totalCost) VALUES (?, ?, ?, ?)';
-    db.pool.query(query, [ingredientName, ingredientType, amountOrdered, totalCost], (err, result) => {
-        if (err) {
-            console.error("Error adding ingredient:", err);
-            res.status(500).json({ error: "Error adding ingredient to database" });
-        } else {
-            res.status(201).json({ ingredientId: result.insertId });
-        }
-    });
+// CREATE
+app.post("/api/ingredients", (req, res) => {
+  const {
+    name: ingredientName,
+    type: ingredientType,
+    amount: amountOrdered,
+    cost: totalCost,
+  } = req.body;
+  const query =
+    "INSERT INTO Ingredients (ingredientName, ingredientType, amountOrdered, totalCost) VALUES (?, ?, ?, ?)";
+  db.pool.query(
+    query,
+    [ingredientName, ingredientType, amountOrdered, totalCost],
+    (err, result) => {
+      if (err) {
+        console.error("Error adding ingredient:", err);
+        res.status(500).json({ error: "Error adding ingredient to database" });
+      } else {
+        res.status(201).json({ ingredientId: result.insertId });
+      }
+    }
+  );
 });
 
 // UPDATE
@@ -306,76 +313,92 @@ app.put("/api/ingredients/:ingredientId", (req, res) => {
 app.delete("/api/ingredients/:ingredientId", (req, res) => {
   const { ingredientId } = req.params;
 
-    db.pool.query('DELETE FROM Ingredients WHERE ingredientId = ?', [ingredientId], (err, result) => {
-        if (err) {
-            console.error('Error deleting ingredient:', err);
-            res.status(500).json({ error: "Error deleting ingredient from database" });
-        } else if (result.affectedRows === 0) {
-            res.status(404).send("Ingredient not found");
-        } else {
-            res.sendStatus(200);
-        }
-    });
+  db.pool.query(
+    "DELETE FROM Ingredients WHERE ingredientId = ?",
+    [ingredientId],
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting ingredient:", err);
+        res
+          .status(500)
+          .json({ error: "Error deleting ingredient from database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Ingredient not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
 });
 
-// CRUD for Menus
+// CRUD for Menus -------------------------------------------------------------------------------------------
 // READ - Get all menus
-app.get('/api/menus', (req, res) => {
-    const query = ` SELECT * FROM Menus `;
-    db.pool.query(query, (err, results) => {
-        if (err) {
-            console.error("Error fetching menus:", err);
-            res.status(500).json({ error: "Error fetching menus from database" });
-        } else {
-            res.json(results);
-        }
-    });
+app.get("/api/menus", (req, res) => {
+  const query = ` SELECT * FROM Menus `;
+  db.pool.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching menus:", err);
+      res.status(500).json({ error: "Error fetching menus from database" });
+    } else {
+      res.json(results);
+    }
+  });
 });
 
 // CREATE - Create a new menu
-app.post('/api/menus', (req, res) => {
-    const { restaurantId, menuType, dateUpdated } = req.body;
-    console.log(req.body)
-    const query = 'INSERT INTO Menus (restaurantId, menuType, dateUpdated) VALUES (?, ?, ?)';
-    db.pool.query(query, [restaurantId, menuType, dateUpdated], (err, result) => {
-        if (err) {
-            console.error("Error adding menu:", err);
-            res.status(500).json({ error: "Error adding menu to database" });
-        } else {
-            res.status(201).json({ menuId: result.insertId });
-        }
-    });
+app.post("/api/menus", (req, res) => {
+  const { restaurantId, menuType, dateUpdated } = req.body;
+  console.log(req.body);
+  const query =
+    "INSERT INTO Menus (restaurantId, menuType, dateUpdated) VALUES (?, ?, ?)";
+  db.pool.query(query, [restaurantId, menuType, dateUpdated], (err, result) => {
+    if (err) {
+      console.error("Error adding menu:", err);
+      res.status(500).json({ error: "Error adding menu to database" });
+    } else {
+      res.status(201).json({ menuId: result.insertId });
+    }
+  });
 });
 
 // UPDATE - Update an existing menu
-app.put('/api/menus/:menuId', (req, res) => {
-    const { menuId } = req.params;
-    const { restaurantId, menuType, dateUpdated } = req.body;
-    console.log(req.body)
-    const query = 'UPDATE Menus SET restaurantId = ?, menuType = ?, dateUpdated = ? WHERE menuId = ?';
-    db.pool.query(query, [restaurantId, menuType, dateUpdated, menuId], (err, result) => {
-        if (err) {
-            console.error('Error updating menu:', err);
-            res.status(500).json({ error: "Error updating menu in database" });
-        } else if (result.affectedRows === 0) {
-            res.status(404).send('Menu not found');
-        } else {
-            res.sendStatus(200);
-        }
-    });
+app.put("/api/menus/:menuId", (req, res) => {
+  const { menuId } = req.params;
+  const { restaurantId, menuType, dateUpdated } = req.body;
+  console.log(req.body);
+  const query =
+    "UPDATE Menus SET restaurantId = ?, menuType = ?, dateUpdated = ? WHERE menuId = ?";
+  db.pool.query(
+    query,
+    [restaurantId, menuType, dateUpdated, menuId],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating menu:", err);
+        res.status(500).json({ error: "Error updating menu in database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Menu not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
 });
 
 // DELETE - Delete a menu
-app.delete('/api/menus/:menuId', (req, res) => {
-    const { menuId } = req.params;
-    db.pool.query('DELETE FROM Menus WHERE menuId = ?', [menuId], (err, result) => {
-        if (err) {
-            console.error('Error deleting menu:', err);
-            res.status(500).json({ error: "Error deleting menu from database" });
-        } else if (result.affectedRows === 0) {
-            res.status(404).send("Menu not found");
-        } else {
-            res.sendStatus(200);
-        }
-    });
+app.delete("/api/menus/:menuId", (req, res) => {
+  const { menuId } = req.params;
+  db.pool.query(
+    "DELETE FROM Menus WHERE menuId = ?",
+    [menuId],
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting menu:", err);
+        res.status(500).json({ error: "Error deleting menu from database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Menu not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
 });
