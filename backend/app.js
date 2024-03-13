@@ -499,9 +499,9 @@ app.delete("/api/suppliers/:supplierId", (req, res) => {
   );
 });
 
-// CRUD for Dishes ---------------------------------------------------------------------------------------------
+// CRUD for Deliveries ---------------------------------------------------------------------------------------------
 // READ
-app.get('/api/deliveries', (req, res) => {
+app.get("/api/deliveries", (req, res) => {
   const query = `
       SELECT Deliveries.deliveryId, Deliveries.deliveryDate, 
              Ingredients.ingredientName, Suppliers.supplierName, Restaurants.restaurantId
@@ -512,13 +512,13 @@ app.get('/api/deliveries', (req, res) => {
   `;
 
   db.pool.query(query, (error, results) => {
-      if (error) {
-          console.error(error);
-          res.status(500).send('Error fetching data');
-          return;
-      }
-      console.log('deliveries fetched results', results);
-      res.json(results);
+    if (error) {
+      console.error(error);
+      res.status(500).send("Error fetching data");
+      return;
+    }
+    console.log("deliveries fetched results", results);
+    res.json(results);
   });
 });
 
@@ -535,8 +535,11 @@ app.post("/api/deliveries", (req, res) => {
   console.log("restaurantId:", restaurantId);
   console.log("deliveryDate:", deliveryDate);
 
-  const query = 'INSERT INTO Deliveries (ingredientId, supplierId, restaurantId, deliveryDate) VALUES (?, ?, ?, ?)';
-  db.pool.query(query, [ingredientId, supplierId, restaurantId, deliveryDate],
+  const query =
+    "INSERT INTO Deliveries (ingredientId, supplierId, restaurantId, deliveryDate) VALUES (?, ?, ?, ?)";
+  db.pool.query(
+    query,
+    [ingredientId, supplierId, restaurantId, deliveryDate],
     (err, result) => {
       if (err) {
         console.error("Error adding delivery from app.js:", err);
@@ -572,7 +575,6 @@ app.put("/api/deliveries/:deliveryId", (req, res) => {
   );
 });
 
-
 // DELETE
 app.delete("/api/deliveries/:deliveryId", (req, res) => {
   const { deliveryId } = req.params;
@@ -595,4 +597,109 @@ app.delete("/api/deliveries/:deliveryId", (req, res) => {
   );
 });
 
+// CRUD for RestaurantSuppliers ---------------------------------------------------------------------------------------------
+// READ
+app.get("/api/restaurantSuppliers", (req, res) => {
+  const query = `
+      SELECT 
+        RestaurantSuppliers.restaurantId AS RestaurantID,
+        Restaurants.location AS RestaurantLocation,
+        RestaurantSuppliers.supplierId AS SupplierID,
+        Suppliers.supplierName AS SupplierName
+      FROM 
+        RestaurantSuppliers
+      INNER JOIN 
+        Suppliers ON RestaurantSuppliers.supplierId = Suppliers.supplierId
+      INNER JOIN 
+        Restaurants ON RestaurantSuppliers.restaurantId = Restaurants.restaurantId
+      ORDER BY 
+        RestaurantSuppliers.restaurantId, RestaurantSuppliers.supplierId
+  `;
 
+  db.pool.query(query, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Error fetching data");
+      return;
+    }
+    console.log("restaurantSuppliers fetched results", results);
+    res.json(results);
+  });
+});
+
+// CREATE
+app.post("/api/restaurantSuppliers", (req, res) => {
+  const restaurantId = req.body.restaurantId;
+  const supplierId = req.body.supplierId;
+
+  console.log("Received POST request to /api/restaurantSuppliers", req.body);
+  console.log("restaurantId:", restaurantId);
+  console.log("supplierId:", supplierId);
+
+  const query =
+    "INSERT INTO RestaurantSuppliers (restaurantId, supplierId) VALUES (?, ?)";
+  db.pool.query(query, [restaurantId, supplierId], (err, result) => {
+    if (err) {
+      console.error(
+        "Error adding restaurantSuppliers intersection from app.js:",
+        err
+      );
+      res
+        .status(500)
+        .send("Error adding restaurantSuppliers intersection from app.js");
+    } else {
+      console.log(
+        "restaurantSuppliers relationship added successfully with ID:",
+        result.insertId
+      );
+      res.status(201).json({ restaurantSupplierId: result.insertId });
+    }
+  });
+});
+
+// UPDATE
+app.put("/api/restaurantSuppliers/:restaurantSupplierId", (req, res) => {
+  const { restaurantSupplierId } = req.params;
+  const { restaurantId, supplierId } = req.body;
+  console.log(req.body);
+  const query =
+    "UPDATE RestaurantSuppliers SET restaurantId = ?, supplierId = ? WHERE restaurantSupplierId = ?";
+  db.pool.query(
+    query,
+    [restaurantId, supplierId, restaurantSupplierId],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating restaurantSuppliers intersection:", err);
+        res.status(500).json({
+          error: "Error updating restaurantSuppliers intersection in database",
+        });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Intersection not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// DELETE
+app.delete("/api/restaurantSuppliers/:restaurantSupplierId", (req, res) => {
+  const { restaurantSupplierId } = req.params;
+
+  db.pool.query(
+    "DELETE FROM RestaurantSuppliers WHERE restaurantSupplierId = ?",
+    [restaurantSupplierId],
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting intersection:", err);
+        res
+          .status(500)
+          .json({ error: "Error deleting intersection from database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("restaurantSuppliers intersection not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});

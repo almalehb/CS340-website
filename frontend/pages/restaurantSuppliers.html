@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Restaurants</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="restaurantSuppliers.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Our Restaurants</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="restaurants.html">Restaurants</a></li>
+          <li><a href="menus.html">Menus</a></li>
+          <li><a href="dishes.html">Dishes</a></li>
+          <li><a href="ingredients.html">Ingredients</a></li>
+          <li><a href="suppliers.html">Suppliers</a></li>
+          <li><a href="deliveries.html">Deliveries</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Restaurant - Suppliers Relationships</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>RestaurantID</th>
+              <th>Location</th>
+              <th>SupplierID</th>
+              <th>Supplier</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody id="restSupp-data"></tbody>
+        </table>
+        <form id="restaurantSuppliers-form" style="margin-top: 20px">
+          <fieldset>
+            <legend>
+              <strong>Add New Restaurant-Supplier Relationship</strong>
+            </legend>
+            <label for="restaurantId">RestaurantID:</label>
+            <select id="restaurantId" name="restaurantId" required>
+              <!-- RestaurantID options will be dynamically populated by JavaScript -->
+            </select>
+
+            <label for="supplierId">SupplierID:</label>
+            <select id="supplierId" name="supplierId" required>
+              <!-- SupplierID options will be dynamically populated by JavaScript -->
+            </select>
+
+            <button type="submit">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>
+        Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
+        541-711-1511
+      </p>
+    </footer>
+  </body>
+</html>
