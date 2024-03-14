@@ -602,10 +602,10 @@ app.delete("/api/deliveries/:deliveryId", (req, res) => {
 app.get("/api/restaurantSuppliers", (req, res) => {
   const query = `
       SELECT 
-        RestaurantSuppliers.restaurantId AS RestaurantID,
-        Restaurants.location AS RestaurantLocation,
-        RestaurantSuppliers.supplierId AS SupplierID,
-        Suppliers.supplierName AS SupplierName
+        RestaurantSuppliers.restaurantId,
+        Restaurants.location,
+        RestaurantSuppliers.supplierId,
+        Suppliers.supplierName
       FROM 
         RestaurantSuppliers
       INNER JOIN 

@@ -7,20 +7,23 @@ function fetchRestaurantSuppliers() {
 }
 
 function renderRestaurantSuppliersTable(restaurantSuppliers) {
-  // const tableBody = document.querySelector('table tbody');
   const tableBody = document.getElementById("restSupp-data");
   tableBody.innerHTML = "";
 
   restaurantSuppliers.forEach((restaurantSupplier) => {
     const row = tableBody.insertRow();
-    const restSuppCell = row.insertCell();
+    // Set the data-restaurant-supplier-id attribute
+    row.setAttribute(
+      "data-restaurant-supplier-id",
+      restaurantSupplier.restaurantSupplierId
+    );
+
     const restaurantIdCell = row.insertCell();
     const locationCell = row.insertCell();
     const supplierIdCell = row.insertCell();
     const supplierNameCell = row.insertCell();
     const operationsCell = row.insertCell();
 
-    restSuppCell.textContent = restaurantSupplier.restaurantSupplierId;
     restaurantIdCell.textContent = restaurantSupplier.restaurantId;
     locationCell.textContent = restaurantSupplier.location;
     supplierIdCell.textContent = restaurantSupplier.supplierId;
@@ -29,10 +32,12 @@ function renderRestaurantSuppliersTable(restaurantSuppliers) {
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
     editButton.classList.add("edit-btn");
+    // Pass the row to editRow function
     editButton.addEventListener("click", () => editRow(row));
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    // Use the correct function for deletion
     deleteButton.addEventListener("click", () =>
       deleteRestaurantSuppliers(restaurantSupplier.restaurantSupplierId)
     );
@@ -78,16 +83,15 @@ fetchOptions(
   "/api/restaurants",
   document.getElementById("restaurantId"),
   "restaurantId",
-  "location"
+  "restaurantId"
 );
 
 function addRestaurantSuppliers() {
   const restaurantIdInput = document.getElementById("restaurantId");
-  // const locationInput = document.getElementById("location");
   const supplierIdInput = document.getElementById("supplierId");
-  // const supplierNameInput = document.getElementById("supplierName");
 
-  const data = `restaurantId=${encodeURIComponent(restaurantIdInput.value)}&
+  const data = `restaurantId=${encodeURIComponent(
+    restaurantIdInput.value
   )}&supplierId=${encodeURIComponent(supplierIdInput.value)}`;
 
   fetch("/api/restaurantSuppliers", {
@@ -98,9 +102,7 @@ function addRestaurantSuppliers() {
     .then((response) => {
       if (response.ok) {
         restaurantIdInput.value = "";
-        // locationInput.value = "";
         supplierIdInput.value = "";
-        // supplierNameInput.value = "";
         fetchRestaurantSuppliers();
       } else {
         console.error(
@@ -118,99 +120,87 @@ document.querySelector("form").addEventListener("submit", (event) => {
 });
 
 function editRestaurantSuppliers(editedData) {
-  const deliveryId = editedData.restaurantSupplierId;
-  const data = `ingredientId=${encodeURIComponent(
-    editedData.ingredientId
-  )}&supplierId=${encodeURIComponent(
-    editedData.supplierId
-  )}&restaurantId=${encodeURIComponent(
-    editedData.restaurantId
-  )}&deliveryDate=${encodeURIComponent(editedData.deliveryDate)}`;
-  fetch(`/api/deliveries/${deliveryId}`, {
+  const { restaurantSupplierId, restaurantId, supplierId } = editedData;
+  const data = `restaurantId=${encodeURIComponent(
+    restaurantId
+  )}&supplierId=${encodeURIComponent(supplierId)}`;
+
+  fetch(`/api/restaurantSuppliers/${restaurantSupplierId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: data,
   })
     .then((response) => {
       if (response.ok) {
-        fetchDeliveries();
+        fetchRestaurantSuppliers(); // Refresh the list
       } else {
-        console.error("Error updating delivery:", response.statusText);
+        console.error(
+          "Error updating restaurantSuppliers intersection:",
+          response.statusText
+        );
       }
     })
-    .catch((error) => console.error("Error updating delivery:", error));
+    .catch((error) =>
+      console.error("Error updating restaurantSuppliers intersection:", error)
+    );
 }
 
-// async function editRow(row) {
-//   const cells = row.querySelectorAll("td");
-//   const editButton = row.querySelector(".edit-btn");
+async function editRow(row) {
+  const restaurantSupplierId = row.getAttribute("data-restaurant-supplier-id");
+  const cells = row.querySelectorAll("td");
+  const editButton = row.querySelector(".edit-btn");
 
-//   if (editButton.textContent === "Edit") {
-//     for (let i = 1; i < cells.length - 1; i++) {
-//       // skipping ID cell and button cell
-//       const cell = cells[i];
-//       const originalContent = cell.textContent;
+  if (editButton.textContent === "Edit") {
+    // Convert static text to dropdown for Restaurant ID and Supplier ID
+    const restaurantSelect = document.createElement("select");
+    await fetchOptions(
+      "/api/restaurants",
+      restaurantSelect,
+      "location",
+      "restaurantId"
+    );
+    cells[0].innerHTML = "";
+    cells[0].appendChild(restaurantSelect);
 
-//       let attributeName, columnName, id;
-//       switch (i) {
-//         case 1:
-//           attributeName = "ingredients";
-//           columnName = "ingredientName";
-//           id = "ingredientId";
-//           break;
-//         case 2:
-//           attributeName = "suppliers";
-//           columnName = "supplierName";
-//           id = "supplierId";
-//           break;
-//         case 3:
-//           attributeName = "restaurants";
-//           columnName = "restaurantId";
-//           id = "restaurantId";
-//           break;
-//         case 4:
-//           attributeName = "deliveryDate";
+    const supplierSelect = document.createElement("select");
+    await fetchOptions(
+      "/api/suppliers",
+      supplierSelect,
+      "supplierName",
+      "supplierId"
+    );
+    cells[2].innerHTML = "";
+    cells[2].appendChild(supplierSelect);
 
-//           break;
-//         default:
-//           attributeName = ""; // Handle other cases if needed
-//       }
-//       if (attributeName !== "deliveryDate") {
-//         // Fetch options for the dropdown
-//         const select = document.createElement("select");
-//         const url = `/api/${attributeName}`;
-//         fetchOptions(url, select, columnName, id);
+    editButton.textContent = "Confirm Edit";
+  } else {
+    // Collect edited data
+    const editedData = {
+      restaurantSupplierId: restaurantSupplierId, // Ensure this is correctly fetched and used
+      restaurantId: cells[0].querySelector("select").value,
+      supplierId: cells[2].querySelector("select").value,
+    };
 
-//         cell.innerHTML = originalContent;
-//         cell.appendChild(select);
-//       } else {
-//         // deliverydate
-//         cell.innerHTML = `<input type='date' value='${cell.textContent}' required/>`;
-//       }
-//     }
-//     editButton.textContent = "Confirm Edit";
-//   } else {
-//     const editedData = {
-//       deliveryId: row.cells[0].textContent,
-//       ingredientId: row.cells[1].querySelector("select").value,
-//       supplierId: row.cells[2].querySelector("select").value,
-//       restaurantId: row.cells[3].querySelector("select").value,
-//       deliveryDate: row.cells[4].querySelector("input").value,
-//     };
+    editRestaurantSuppliers(editedData);
+    editButton.textContent = "Edit";
+  }
+}
 
-//     editDelivery(editedData);
-//     editButton.textContent = "Edit";
-//   }
-// }
-
-// function deleteDelivery(deliveryId) {
-//   fetch(`/api/deliveries/${deliveryId}`, { method: "DELETE" })
-//     .then((response) => {
-//       if (response.ok) {
-//         fetchDeliveries();
-//       } else {
-//         console.error("Error deleting delivery:", response.statusText);
-//       }
-//     })
-//     .catch((error) => console.error("Error deleting delivery:", error));
-// }
+function deleteRestaurantSuppliers(restaurantSupplierId) {
+  fetch(`/api/restaurantSuppliers/${restaurantSupplierId}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (response.ok) {
+        fetchRestaurantSuppliers();
+      } else {
+        console.error(
+          "Error deleting restaurantSuppliers intersection:",
+          response.statusText
+        );
+      }
+    })
+    .catch((error) =>
+      console.error("Error deleting restaurantSuppliers:", error)
+    );
+}

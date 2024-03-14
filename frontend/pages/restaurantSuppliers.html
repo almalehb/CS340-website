@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>Restaurants</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="restaurantSuppliers.js"></script>
   </head>
   <body>
     <header>
@@ -27,7 +26,6 @@
         <table>
           <thead>
             <tr>
-              <th>ID</th>
               <th>RestaurantID</th>
               <th>Location</th>
               <th>SupplierID</th>
@@ -47,9 +45,9 @@
               <!-- RestaurantID options will be dynamically populated by JavaScript -->
             </select>
 
-            <label for="supplierId">SupplierID:</label>
+            <label for="supplierId">Supplier:</label>
             <select id="supplierId" name="supplierId" required>
-              <!-- SupplierID options will be dynamically populated by JavaScript -->
+              <!-- Supplier options will be dynamically populated by JavaScript -->
             </select>
 
             <button type="submit">Submit</button>
@@ -63,5 +61,6 @@
         541-711-1511
       </p>
     </footer>
+    <script src="restaurantSuppliers.js"></script>
   </body>
 </html>
