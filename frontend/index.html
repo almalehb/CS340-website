@@ -1,41 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coiny&family=Montserrat:ital,wght@0,200;0,300;0,700;1,200;1,300;1,600&family=Roboto:ital,wght@0,300;0,700;0,900;1,300;1,500;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
     <title>Oregon Food Chain Management System</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome to Our Food Chain Management System</h1>
-        <p>An innovative solution for managing over 500 dishes across 150 locations nationwide.</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="pages/restaurants.html">Restaurants</a></li>
-            <li><a href="pages/menus.html">Menus</a></li>
-            <li><a href="pages/dishes.html">Dishes</a></li>
-            <li><a href="pages/ingredients.html">Ingredients</a></li>
-            <li><a href="pages/suppliers.html">Suppliers</a></li>
-            <li><a href="pages/deliveries.html">Deliveries</a></li>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li>
+            <a class="main-nav-link" href="pages/restaurants.html"
+              >Restaurants</a
+            >
+          </li>
+          <li><a class="main-nav-link" href="pages/menus.html">Menus</a></li>
+          <li><a class="main-nav-link" href="pages/dishes.html">Dishes</a></li>
+          <li>
+            <a class="main-nav-link" href="pages/ingredients.html"
+              >Ingredients</a
+            >
+          </li>
+          <li>
+            <a class="main-nav-link" href="pages/suppliers.html">Suppliers</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="pages/deliveries.html">Deliveries</a>
+          </li>
         </ul>
-    </nav>
+      </nav>
+
+      <a href="#">
+        <img class="logo" alt="ChowDown logo" src="img/chowdown-logo.png" />
+      </a>
+    </header>
+
     <main>
-        <section>
-            <h2>About</h2>
-            <p>Our system tracks and records the specific needs of each of our restaurants, detailing the usage of over 2000 different ingredients sourced from more than 300 suppliers. This ensures that each restaurant receives the exact ingredients necessary to create every dish, enhancing the consistency and quality of our dishes, aiming to reduce waste by 20% and increase customer satisfaction.</p>
-        </section>
-        <section>
-            <h2>Features</h2>
-            <ul>
-                <li>Comprehensive database tracking of menus, ingredients, and supplier relationships.</li>
-                <li>Efficient management of day-to-day operations across all locations.</li>
-                <li>Advanced analytics for waste reduction and quality improvement.</li>
+      <section class="section-hero">
+        <div class="hero">
+          <div class="hero-img-box">
+            <img
+              src="img/chowdown-rest.jpg"
+              class="hero-img"
+              alt="ChowDown restaurant location"
+            />
+          </div>
+          <div class="hero-text-box">
+            <h1 class="heading-primary">
+              Welcome to Our Food Chain Management System
+            </h1>
+            <p class="hero-description">
+              Our system tracks and records the specific needs of each of our
+              restaurants, detailing the usage of over 2000 different
+              ingredients sourced from more than 300 suppliers. This ensures
+              that each restaurant receives the exact ingredients necessary to
+              create every dish, enhancing the consistency and quality of our
+              dishes, aiming to reduce waste by 20% and increase customer
+              satisfaction.
+            </p>
+            <h3 class="heading-tertiary">Features</h3>
+            <ul class="list">
+              <li class="list-item">
+                Comprehensive database tracking of menus, ingredients, and
+                supplier relationships.
+              </li>
+              <li class="list-item">
+                Efficient management of day-to-day operations across all
+                locations.
+              </li>
+              <li class="list-item">
+                Advanced analytics for waste reduction and quality improvement.
+              </li>
             </ul>
-        </section>
+          </div>
+        </div>
+      </section>
     </main>
     <footer>
-        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+      <p>
+        Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
+        541-711-1511
+      </p>
     </footer>
-</body>
+  </body>
 </html>
