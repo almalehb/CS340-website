@@ -21,16 +21,12 @@
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li>
-            <a class="main-nav-link" href="restaurants.html"
-              >Restaurants</a
-            >
+            <a class="main-nav-link" href="restaurants.html">Restaurants</a>
           </li>
           <li><a class="main-nav-link" href="menus.html">Menus</a></li>
           <li><a class="main-nav-link" href="dishes.html">Dishes</a></li>
           <li>
-            <a class="main-nav-link" href="ingredients.html"
-              >Ingredients</a
-            >
+            <a class="main-nav-link" href="ingredients.html">Ingredients</a>
           </li>
           <li>
             <a class="main-nav-link" href="suppliers.html">Suppliers</a>
@@ -46,65 +42,45 @@
       </a>
     </header>
     <main>
-      <section>
-        <h2>List of Restaurants</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>RID</th>
-              <th>Location</th>
-              <th>Manager</th>
-              <th>Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
-            <tr>
-              <td>1</td>
-              <td>154 Saint Street, Manhattan, NY 10016</td>
-              <td>Kevin Bacon</td>
-              <td>
-                <button>Edit</button>
-                <button>Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <form method="POST" action="/api/restaurants" style="margin-top: 20px">
-          <fieldset>
-            <legend><strong>Add New Restaurant</strong></legend>
-            <label for="location">Location:</label>
-            <input type="text" id="location" name="location" required />
+      <section class="section-data">
+        <div class="data">
+          <h2 class="heading-secondary">List of Restaurants</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>RID</th>
+                <th>Location</th>
+                <th>Manager</th>
+                <th>Operations</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <form
+            method="POST"
+            action="/api/restaurants"
+            style="margin-top: 20px"
+          >
+            <fieldset>
+              <legend><strong>Add New Restaurant</strong></legend>
+              <label for="location">Location:</label>
+              <input type="text" id="location" name="location" required />
 
-            <label for="manager">Manager:</label>
-            <input type="text" id="manager" name="manager" required />
-            <input type="submit" value="Add Restaurant" />
-          </fieldset>
-        </form>
+              <label for="manager">Manager:</label>
+              <input type="text" id="manager" name="manager" required />
+              <input type="submit" value="Add Restaurant" />
+            </fieldset>
+          </form>
+        </div>
       </section>
-      <!-- <section>
-        <h2>Restaurant Suppliers</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>RID</th>
-              <th>Location</th>
-              <th>SID</th>
-              <th>Supplier</th>
-              <th>Operations</th>
-            </tr>
-          </thead>
-          <tbody id="restaurantSuppliers-data"></tbody>
-        </table>
-      </section> -->
-      <a href="restaurantSuppliers.html">Restaurant Suppliers</a>
+      <a class="main-nav-link" href="restaurantSuppliers.html">Restaurant Suppliers</a>
     </main>
     <footer>
       <p>
         Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
         541-711-1511
       </p>
-    </footer>
+    </footer class="footer">
     <script src="restaurants.js"></script>
   </body>
 </html>

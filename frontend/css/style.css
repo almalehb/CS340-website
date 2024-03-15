@@ -5,13 +5,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fab061;
-  padding: 2rem 3.2rem 2rem 3.2rem;
+  background-color: #f99c39;
+  padding: 0.5rem 3.2rem 0.5rem 3.2rem;
 }
 
 .logo {
-  height: 8.4rem;
-  width: 16.8rem;
+  height: 7.2rem;
+  width: 14.4rem;
 }
 
 /**************************/
@@ -78,4 +78,28 @@
 
 .hero-img {
   width: 100%;
+}
+
+/**************************/
+/* DATABASE SECTION */
+/**************************/
+.section-data {
+  background-color: #feebd8;
+  padding: 3.6rem 0 3.6rem 0;
+}
+
+.data {
+  max-width: 130rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+  align-items: center;
+}
+
+/**************************/
+/* FOOTER */
+/**************************/
+
+.footer {
+  padding: 12.8rem 0;
+  border-top: 1px solid #4f2902;
 }
