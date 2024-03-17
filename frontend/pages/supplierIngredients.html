@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Ingredients</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Supplier Ingredients Records</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="restaurants.html">Restaurants</a></li>
+                <li><a href="menus.html">Menus</a></li>
+                <li><a href="dishes.html">Dishes</a></li>
+                <li><a href="ingredients.html">Ingredients</a></li>
+                <li><a href="suppliers.html">Suppliers</a></li>
+                <li><a href="deliveries.html">Deliveries</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Supplier Ingredients Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Ingredient</th>
+                        <th>Supplier</th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="table-data">
+                   
+                </tbody>
+            </table>
+            
+            <form id="delivery-form" style="margin-top: 20px;">
+                <fieldset>
+                    <legend>Insert new item</legend>
+                    
+                    <label for="ingredientId">Ingredient:</label>
+                    <select id="ingredientId" name="ingredientId" required>
+                        <!-- Ingredient options will be dynamically populated by JavaScript -->
+                    </select>
+            
+                    <label for="supplierId">Supplier:</label>
+                    <select id="supplierId" name="supplierId" required>
+                        <!-- Supplier options will be dynamically populated by JavaScript -->
+                    </select>
+            
+                    <button type="submit">Submit</button>
+                </fieldset>
+            </form>
+            
+        </section>
+        
+    </main>
+    <footer>
+        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+    </footer>
+    <script src="supplierIngredients.js"></script>
+</body>
+</html>
