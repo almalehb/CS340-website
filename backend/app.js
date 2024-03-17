@@ -602,7 +602,6 @@ app.delete("/api/deliveries/:deliveryId", (req, res) => {
 });
 
 // CRUD for supplierIngredients ----------------------------------------------------------------------------------------
-
 //READ
 app.get("/api/supplierIngredients", (req, res) => {
   const query = `
@@ -783,12 +782,10 @@ app.delete("/api/restaurantSuppliers/:restaurantSupplierId", (req, res) => {
     [restaurantSupplierId],
     (err, result) => {
       if (err) {
-        console.error("Error deleting intersection:", err);
-        res
-          .status(500)
-          .json({ error: "Error deleting intersection from database" });
+        console.error("Error deleting relation:", err);
+        res.status(500).json({ error: "Error deleting from database" });
       } else if (result.affectedRows === 0) {
-        res.status(404).send("restaurantSuppliers intersection not found");
+        res.status(404).send("Id not found");
       } else {
         res.sendStatus(200);
       }

@@ -12,18 +12,14 @@ function renderRestaurantSuppliersTable(restaurantSuppliers) {
 
   restaurantSuppliers.forEach((restaurantSupplier) => {
     const row = tableBody.insertRow();
-    // Set the data-restaurant-supplier-id attribute
-    row.setAttribute(
-      "data-restaurant-supplier-id",
-      restaurantSupplier.restaurantSupplierId
-    );
-
+    const id = row.insertCell();
     const restaurantIdCell = row.insertCell();
     const locationCell = row.insertCell();
     const supplierIdCell = row.insertCell();
     const supplierNameCell = row.insertCell();
     const operationsCell = row.insertCell();
 
+    id.textContent = restaurantSupplier.restaurantSupplierId;
     restaurantIdCell.textContent = restaurantSupplier.restaurantId;
     locationCell.textContent = restaurantSupplier.location;
     supplierIdCell.textContent = restaurantSupplier.supplierId;
@@ -49,15 +45,6 @@ function renderRestaurantSuppliersTable(restaurantSuppliers) {
 
 fetchRestaurantSuppliers();
 
-async function fetchOption(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-  } catch (error) {
-    console.error("Error fetching options:", error);
-  }
-}
-
 async function fetchOptions(url, selectElement, name, id) {
   try {
     const response = await fetch(url);
@@ -65,7 +52,7 @@ async function fetchOptions(url, selectElement, name, id) {
     data.forEach((option) => {
       const optionElement = document.createElement("option");
       optionElement.value = option[id];
-      optionElement.textContent = option[name]; // Assuming the property name holds the name of the entity
+      optionElement.textContent = option[name];
       selectElement.appendChild(optionElement);
     });
   } catch (error) {
@@ -79,6 +66,7 @@ fetchOptions(
   "supplierName",
   "supplierId"
 );
+
 fetchOptions(
   "/api/restaurants",
   document.getElementById("restaurantId"),
@@ -194,13 +182,10 @@ function deleteRestaurantSuppliers(restaurantSupplierId) {
       if (response.ok) {
         fetchRestaurantSuppliers();
       } else {
-        console.error(
-          "Error deleting restaurantSuppliers intersection:",
-          response.statusText
-        );
+        console.error("Error deleting relationship:", response.statusText);
       }
     })
     .catch((error) =>
-      console.error("Error deleting restaurantSuppliers:", error)
+      console.error("Error deleting RestaurantSuppliers:", error)
     );
 }
