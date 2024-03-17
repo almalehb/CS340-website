@@ -45,6 +45,10 @@ app.get("/suppliers", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend/pages/suppliers.html"));
 });
 
+app.get("/supplierIngredients", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/pages/supplierIngredients.html"));
+});
+
 /*
     LISTENER
 */
@@ -590,6 +594,94 @@ app.delete("/api/deliveries/:deliveryId", (req, res) => {
           .json({ error: "Error deleting delivery from database" });
       } else if (result.affectedRows === 0) {
         res.status(404).send("Delivery not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// CRUD for supplierIngredients ----------------------------------------------------------------------------------------
+
+//READ
+app.get("/api/supplierIngredients", (req, res) => {
+  const query = `
+      SELECT SupplierIngredients.supplierIngredientId, Suppliers.supplierName, Ingredients.ingredientName
+      FROM SupplierIngredients
+      INNER JOIN Suppliers ON SupplierIngredients.supplierId = Suppliers.supplierId
+      INNER JOIN Ingredients ON SupplierIngredients.ingredientId = Ingredients.ingredientId 
+
+  `;
+
+  db.pool.query(query, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Error fetching data");
+      return;
+    }
+    console.log("deliveries fetched results", results);
+    res.json(results);
+  });
+});
+
+// CREATE
+app.post("/api/supplierIngredients", (req, res) => {
+  const ingredientId = req.body.ingredientId;
+  const supplierId = req.body.supplierId;
+
+  console.log("Received POST request to /api/supplierIngredients", req.body);
+  console.log("ingredientId:", ingredientId);
+  console.log("supplierId:", supplierId);
+
+  const query =
+    "INSERT INTO SupplierIngredients (supplierId, ingredientId) VALUES (?, ?)";
+  db.pool.query(query, [supplierId, ingredientId], (err, result) => {
+    if (err) {
+      console.error("Error adding item from app.js:", err);
+      res.status(500).send("Error adding item from app.js");
+    } else {
+      console.log("item added successfully with ID:", result.insertId);
+      res.status(201).json({ deliveryId: result.insertId });
+    }
+  });
+});
+
+// UPDATE
+app.put("/api/supplierIngredients/:supplierIngredientId", (req, res) => {
+  const { supplierIngredientId } = req.params;
+  const { ingredientId, supplierId } = req.body;
+  console.log(req.body);
+  const query =
+    "UPDATE SupplierIngredients SET supplierId = ?, ingredientId = ? WHERE supplierIngredientId = ?";
+  db.pool.query(
+    query,
+    [supplierId, ingredientId, supplierIngredientId],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating item:", err);
+        res.status(500).json({ error: "Error updating item in database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Item not found");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
+// DELETE
+app.delete("/api/supplierIngredients/:supplierIngredientId", (req, res) => {
+  const { supplierIngredientId } = req.params;
+
+  db.pool.query(
+    "DELETE FROM SupplierIngredients WHERE supplierIngredientId = ?",
+    [supplierIngredientId],
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting:", err);
+        res.status(500).json({ error: "Error deleting from database" });
+      } else if (result.affectedRows === 0) {
+        res.status(404).send("Id not found");
       } else {
         res.sendStatus(200);
       }
