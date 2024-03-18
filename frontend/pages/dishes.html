@@ -1,144 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <title>Dishes</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Coiny&family=Montserrat:ital,wght@0,200;0,300;0,700;1,200;1,300;1,600&family=Roboto:ital,wght@0,300;0,700;0,900;1,300;1,500;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sono:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+        />
 
-<body>
-    <header>
-        <h1>Our Dishes</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="restaurants.html">Restaurants</a></li>
-                <li><a href="menus.html">Menus</a></li>
-                <li><a href="dishes.html">Dishes</a></li>
-                <li><a href="ingredients.html">Ingredients</a></li>
-                <li><a href="suppliers.html">Suppliers</a></li>
-                <li><a href="deliveries.html">Deliveries</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>List of Dishes</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Operations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
-                    <tr>
-                        <td>1</td>
-                        <td>Quesadilla</td>
-                        <td>Entree</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <form method="POST" action="/api/dishes" style="margin-top: 20px;">
-                <fieldset>
-                    <legend><strong>Add New Dish</strong></legend>
-                    <label for="name">Dish Name:</label>
-                    <input type="text" id="name" name="name" required>
+        <link rel="stylesheet" href="../css/general.css" />
+        <link rel="stylesheet" href="../css/style.css" />
 
-                    <label for="type">Dish Type:</label>
-                    <input type="text" id="type" name="type" required>
+        <title>Dishes</title>
+    </head>
 
-                    <label for="ingredients">Ingredients:</label>
-                    <select id="ingredients" name="ingredients" multiple="multiple" required>
-                        <option value="ingredientId1">Oxaca Cheese</option>
-                        <option value="ingredientId2">Chicken</option>
-                        <option value="ingredientId2">Tequila</option>
-                        <option value="ingredientId2">Shrimp</option>
-                        <option value="ingredientId2">Potatoes</option>
-                        <option value="ingredientId2">Ice Cream</option>
-                    </select>
+    <body>
+        <header class="header">
+            <nav class="main-nav">
+              <ul class="main-nav-list">
+                <li>
+                  <a class="main-nav-link" href="restaurants.html">Restaurants</a>
+                </li>
+                <li><a class="main-nav-link" href="menus.html">Menus</a></li>
+                <li><a class="main-nav-link" href="dishes.html">Dishes</a></li>
+                <li>
+                  <a class="main-nav-link" href="ingredients.html">Ingredients</a>
+                </li>
+                <li>
+                  <a class="main-nav-link" href="suppliers.html">Suppliers</a>
+                </li>
+                <li>
+                  <a class="main-nav-link" href="deliveries.html">Deliveries</a>
+                </li>
+              </ul>
+            </nav>
+      
+            <a href="../index.html">
+              <img class="logo" alt="ChowDown logo" src="../img/chowdown-logo.png" />
+            </a>
+          </header>
+        <main>
+            <section class="section-data">
+                <div class="data">
+                    <h2 class="heading-secondary">List of Dishes</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
+                            <tr>
+                                <td>1</td>
+                                <td>Quesadilla</td>
+                                <td>Entree</td>
+                                <td>
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form method="POST" action="/api/dishes" style="margin-top: 20px;">
+                        <fieldset>
+                            <legend><strong>Add New Dish</strong></legend>
+                            <label for="name">Dish Name:</label>
+                            <input type="text" id="name" name="name" required>
 
-                    <input type="submit" value="Add Dish">
-                </fieldset>
-            </form>
-        </section>
-        <section>
-            <h2>Dish Ingredients</h2>
-            <details>
-                <summary>Quesadilla (Dish ID: 1)</summary>
-                <ul>
-                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
-                    <li>Chicken (Ingredient ID: 2)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Empanadas (Dish ID: 2)</summary>
-                <ul>
-                    <li>Chicken (Ingredient ID: 2)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Chicken Fingers (Dish ID: 3)</summary>
-                <ul>
-                    <li>Chicken (Ingredient ID: 2)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Chicken Fries (Dish ID: 4)</summary>
-                <ul>
-                    <li>Chicken (Ingredient ID: 2)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Mozzarella Sticks (Dish ID: 5)</summary>
-                <ul>
-                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Popcorn Shrimp (Dish ID: 6)</summary>
-                <ul>
-                    <li>Shrimp (Ingredient ID: 4)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Cheese Cake (Dish ID: 7)</summary>
-                <ul>
-                    <li>Oaxaca Cheese (Ingredient ID: 1)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Vanilla Ice Cream (Dish ID: 8)</summary>
-                <ul>
-                    <li>Ice Cream (Ingredient ID: 6)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Mojito (Dish ID: 9)</summary>
-                <ul>
-                    <li>Tequila (Ingredient ID: 3)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Margarita (Dish ID: 10)</summary>
-                <ul>
-                    <li>Tequila (Ingredient ID: 3)</li>
-                </ul>
-            </details>
-        </section>
-    </main>
-    <footer>
-        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
-    </footer>
-    <script src="dishes.js"></script>
-</body>
+                            <label for="type">Dish Type:</label>
+                            <input type="text" id="type" name="type" required>
+
+                            <label for="ingredients">Ingredients:</label>
+                            <select id="ingredients" name="ingredients" multiple="multiple" required>
+                                <option value="ingredientId1">Oxaca Cheese</option>
+                                <option value="ingredientId2">Chicken</option>
+                                <option value="ingredientId2">Tequila</option>
+                                <option value="ingredientId2">Shrimp</option>
+                                <option value="ingredientId2">Potatoes</option>
+                                <option value="ingredientId2">Ice Cream</option>
+                            </select>
+
+                            <input type="submit" value="Add Dish">
+                        </fieldset>
+                    </form>
+
+                    <h2>Dish Ingredients</h2>
+                    <details>
+                        <summary>Quesadilla (Dish ID: 1)</summary>
+                        <ul>
+                            <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                            <li>Chicken (Ingredient ID: 2)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Empanadas (Dish ID: 2)</summary>
+                        <ul>
+                            <li>Chicken (Ingredient ID: 2)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Chicken Fingers (Dish ID: 3)</summary>
+                        <ul>
+                            <li>Chicken (Ingredient ID: 2)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Chicken Fries (Dish ID: 4)</summary>
+                        <ul>
+                            <li>Chicken (Ingredient ID: 2)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Mozzarella Sticks (Dish ID: 5)</summary>
+                        <ul>
+                            <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Popcorn Shrimp (Dish ID: 6)</summary>
+                        <ul>
+                            <li>Shrimp (Ingredient ID: 4)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Cheese Cake (Dish ID: 7)</summary>
+                        <ul>
+                            <li>Oaxaca Cheese (Ingredient ID: 1)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Vanilla Ice Cream (Dish ID: 8)</summary>
+                        <ul>
+                            <li>Ice Cream (Ingredient ID: 6)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Mojito (Dish ID: 9)</summary>
+                        <ul>
+                            <li>Tequila (Ingredient ID: 3)</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Margarita (Dish ID: 10)</summary>
+                        <ul>
+                            <li>Tequila (Ingredient ID: 3)</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+        </footer class="footer">
+        <script src="dishes.js"></script>
+    </body>
 
 </html>

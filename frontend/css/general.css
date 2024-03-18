@@ -1,0 +1,110 @@
+/*
+- Primary: #F99C39
+- Tints:
+#FEEBD8
+#FCD7B0
+#FBC488
+#FAB061
+
+- Shades: 
+#F98510
+#4F2902
+*/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+  overflow-x: hidden;
+}
+
+/**************************/
+/* REUSABLE COMPONENTS */
+/**************************/
+.heading-primary1,
+.heading-secondary,
+.heading-tertiary {
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+.heading-primary {
+  font-size: 5.2rem;
+  line-height: 1.05;
+  margin-bottom: 3.2rem;
+}
+
+.heading-secondary {
+  font-size: 4.4rem;
+  line-height: 1.2;
+  margin-bottom: 3.2rem;
+}
+
+.heading-tertiary {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 3.2rem;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.list-item {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  line-height: 1.2;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #333;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f99c39;
+}
+
+table tr:hover {
+  background-color: #fff;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4f2902;
+  color: #fff;
+}
+
+th {
+  font-size: 2rem;
+}
+
+td {
+  font-size: 2rem;
+}

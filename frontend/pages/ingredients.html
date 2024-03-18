@@ -1,202 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Ingredients</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<body>
-    <header>
-        <h1>Our Ingredients</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="restaurants.html">Restaurants</a></li>
-                <li><a href="menus.html">Menus</a></li>
-                <li><a href="dishes.html">Dishes</a></li>
-                <li><a href="ingredients.html">Ingredients</a></li>
-                <li><a href="suppliers.html">Suppliers</a></li>
-                <li><a href="deliveries.html">Deliveries</a></li>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Coiny&family=Montserrat:ital,wght@0,200;0,300;0,700;1,200;1,300;1,600&family=Roboto:ital,wght@0,300;0,700;0,900;1,300;1,500;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sono:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../css/general.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+
+        <title>Ingredients</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <nav class="main-nav">
+            <ul class="main-nav-list">
+                <li>
+                <a class="main-nav-link" href="restaurants.html">Restaurants</a>
+                </li>
+                <li><a class="main-nav-link" href="menus.html">Menus</a></li>
+                <li><a class="main-nav-link" href="dishes.html">Dishes</a></li>
+                <li>
+                <a class="main-nav-link" href="ingredients.html">Ingredients</a>
+                </li>
+                <li>
+                <a class="main-nav-link" href="suppliers.html">Suppliers</a>
+                </li>
+                <li>
+                <a class="main-nav-link" href="deliveries.html">Deliveries</a>
+                </li>
             </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>List of Ingredients</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Amount Ordered</th>
-                        <th>Total Cost</th>
-                        <th>Operations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- This is sample data, we'll remove it once we connect this to a backend/database -->
-                    <tr>
-                        <td>1</td>
-                        <td>Oaxaca Cheese</td>
-                        <td>Dairy</td>
-                        <td>3</td>
-                        <td>83</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Chicken</td>
-                        <td>Meat</td>
-                        <td>5</td>
-                        <td>66</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Tequila</td>
-                        <td>Alcohol</td>
-                        <td>3</td>
-                        <td>95</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Shrimp</td>
-                        <td>Seafood</td>
-                        <td>20</td>
-                        <td>81</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Potatoes</td>
-                        <td>Vegetable</td>
-                        <td>30</td>
-                        <td>89</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
+            </nav>
+    
+            <a href="../index.html">
+            <img class="logo" alt="ChowDown logo" src="../img/chowdown-logo.png" />
+            </a>
+        </header>
+        <main>
+            <section class="section-data">
+                <div class="data">
+                    <h2 class="heading-secondary">List of Ingredients</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Amount Ordered</th>
+                                <th>Total Cost</th>
+                                <th>Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <form style="margin-top: 20px;">
+                        <fieldset>
+                            <legend><strong>Add New Ingredient</strong></legend>
+                            <label for="name">Ingredient Name:</label>
+                            <input type="text" id="name" name="name" required>
 
-                    <tr>
-                        <td>6</td>
-                        <td>Ice Cream</td>
-                        <td>Dessert</td>
-                        <td>8</td>
-                        <td>27</td>
-                        <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <form style="margin-top: 20px;">
-                <fieldset>
-                    <legend><strong>Add New Ingredient</strong></legend>
-                    <label for="name">Ingredient Name:</label>
-                    <input type="text" id="name" name="name" required>
+                            <label for="type">Ingredient Type:</label>
+                            <input type="text" id="type" name="type" required>
 
-                    <label for="type">Ingredient Type:</label>
-                    <input type="text" id="type" name="type" required>
+                            <label for="amount">Amount Ordered:</label>
+                            <input type="number" id="amount" name="amount" min="1" required>
 
-                    <label for="amount">Amount Ordered:</label>
-                    <input type="number" id="amount" name="amount" min="1" required>
+                            <label for="cost">Total Cost:</label>
+                            <input type="number" id="cost" name="cost" step="0.01" required>
 
-                    <label for="cost">Total Cost:</label>
-                    <input type="number" id="cost" name="cost" step="0.01" required>
-
-                    <input type="submit" value="Add Ingredient">
-                </fieldset>
-            </form>
-        </section>
-        <section>
-            <h2>Ingredients Supply</h2>
-            <details>
-                <summary>Oaxaca Cheese - Dairy (ID: 1)</summary>
-                <p>Supplied by: Farming Pros (Supplier ID: 4)</p>
-            </details>
-            <details>
-                <summary>Chicken - Meat (ID: 2)</summary>
-                <p>Supplied by: Carne Street (Supplier ID: 2)</p>
-            </details>
-            <details>
-                <summary>Tequila - Alcohol (ID: 3)</summary>
-                <p>Supplied by: Ice Temple (Supplier ID: 5)</p>
-            </details>
-            <details>
-                <summary>Shrimp - Seafood (ID: 4)</summary>
-                <p>Supplied by: SeaFeed (Supplier ID: 3)</p>
-            </details>
-            <details>
-                <summary>Potatoes - Vegetable (ID: 5)</summary>
-                <p>Supplied by: Jeffs Veges (Supplier ID: 1)</p>
-            </details>
-            <details>
-                <summary>Ice Cream - Dessert (ID: 6)</summary>
-                <p>Supplied by: Ice Temple (Supplier ID: 5)</p>
-            </details>
-        </section>
-        <section>
-            <h2>Dishes Using These Ingredients</h2>
-            <details>
-                <summary>Oaxaca Cheese (Ingredient ID: 1)</summary>
-                <ul>
-                    <li>Quesadilla (Dish ID: 1)</li>
-                    <li>Mozzarella Sticks (Dish ID: 5)</li>
-                    <li>Cheese Cake (Dish ID: 7)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Chicken (Ingredient ID: 2)</summary>
-                <ul>
-                    <li>Quesadilla (Dish ID: 1)</li>
-                    <li>Empanadas (Dish ID: 2)</li>
-                    <li>Chicken Fingers (Dish ID: 3)</li>
-                    <li>Chicken Fries (Dish ID: 4)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Shrimp (Ingredient ID: 4)</summary>
-                <ul>
-                    <li>Popcorn Shrimp (Dish ID: 6)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Tequila (Ingredient ID: 3)</summary>
-                <ul>
-                    <li>Mojito (Dish ID: 9)</li>
-                    <li>Margarita (Dish ID: 10)</li>
-                </ul>
-            </details>
-            <details>
-                <summary>Ice Cream (Ingredient ID: 6)</summary>
-                <ul>
-                    <li>Vanilla Ice Cream (Dish ID: 8)</li>
-                </ul>
-            </details>
-        </section>
-    </main>
-    <footer>
-        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
-    </footer>
-    <script src="ingredients.js"></script>
-</body>
+                            <input type="submit" value="Add Ingredient">
+                        </fieldset>
+                    </form>
+                    <section>
+                        <h2>Ingredients Supply</h2>
+                        <details>
+                            <summary>Oaxaca Cheese - Dairy (ID: 1)</summary>
+                            <p>Supplied by: Farming Pros (Supplier ID: 4)</p>
+                        </details>
+                        <details>
+                            <summary>Chicken - Meat (ID: 2)</summary>
+                            <p>Supplied by: Carne Street (Supplier ID: 2)</p>
+                        </details>
+                        <details>
+                            <summary>Tequila - Alcohol (ID: 3)</summary>
+                            <p>Supplied by: Ice Temple (Supplier ID: 5)</p>
+                        </details>
+                        <details>
+                            <summary>Shrimp - Seafood (ID: 4)</summary>
+                            <p>Supplied by: SeaFeed (Supplier ID: 3)</p>
+                        </details>
+                        <details>
+                            <summary>Potatoes - Vegetable (ID: 5)</summary>
+                            <p>Supplied by: Jeffs Veges (Supplier ID: 1)</p>
+                        </details>
+                        <details>
+                            <summary>Ice Cream - Dessert (ID: 6)</summary>
+                            <p>Supplied by: Ice Temple (Supplier ID: 5)</p>
+                        </details>
+                    </section>
+                    <section>
+                        <h2>Dishes Using These Ingredients</h2>
+                        <details>
+                            <summary>Oaxaca Cheese (Ingredient ID: 1)</summary>
+                            <ul>
+                                <li>Quesadilla (Dish ID: 1)</li>
+                                <li>Mozzarella Sticks (Dish ID: 5)</li>
+                                <li>Cheese Cake (Dish ID: 7)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Chicken (Ingredient ID: 2)</summary>
+                            <ul>
+                                <li>Quesadilla (Dish ID: 1)</li>
+                                <li>Empanadas (Dish ID: 2)</li>
+                                <li>Chicken Fingers (Dish ID: 3)</li>
+                                <li>Chicken Fries (Dish ID: 4)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Shrimp (Ingredient ID: 4)</summary>
+                            <ul>
+                                <li>Popcorn Shrimp (Dish ID: 6)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Tequila (Ingredient ID: 3)</summary>
+                            <ul>
+                                <li>Mojito (Dish ID: 9)</li>
+                                <li>Margarita (Dish ID: 10)</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Ice Cream (Ingredient ID: 6)</summary>
+                            <ul>
+                                <li>Vanilla Ice Cream (Dish ID: 8)</li>
+                            </ul>
+                        </details>
+                    </section>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+        </footer class="footer">
+        <script src="ingredients.js"></script>
+    </body>
 
 </html>

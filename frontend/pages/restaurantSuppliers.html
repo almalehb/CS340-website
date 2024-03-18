@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../css/general.css" />
     <link rel="stylesheet" href="../css/style.css" />
 
-    <title>Restaurants</title>
+    <title>Restaurant - Suppliers</title>
   </head>
   <body>
     <header class="header">
@@ -43,49 +43,49 @@
     </header>
     <main>
       <section class="section-data">
-        <div class="data">
-          <h2 class="heading-secondary">List of Restaurants</h2>
+        <div class=data>
+          <h2 class="heading-secondary">Restaurant - Suppliers Relationships</h2>
           <table>
             <thead>
               <tr>
-                <th>RID</th>
+                <th>ID</th>
+                <th>RestaurantID</th>
                 <th>Location</th>
-                <th>Manager</th>
+                <th>SupplierID</th>
+                <th>Supplier</th>
                 <th>Operations</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="restSupp-data"></tbody>
           </table>
-          <form
-            method="POST"
-            action="/api/restaurants"
-            style="margin-top: 20px"
-          >
+          
+          <form id="restaurantSuppliers-form" style="margin-top: 20px">
             <fieldset>
-              <legend><strong>Add New Restaurant</strong></legend>
-              <label for="location">Location:</label>
-              <input type="text" id="location" name="location" required />
+              <legend>
+                <strong>Add New Restaurant-Supplier Relationship</strong>
+              </legend>
+              <label for="restaurantId">RestaurantID:</label>
+              <select id="restaurantId" name="restaurantId" required>
+                <!-- RestaurantID options will be dynamically populated by JavaScript -->
+              </select>
 
-              <label for="manager">Manager:</label>
-              <input type="text" id="manager" name="manager" required />
-              <input type="submit" value="Add Restaurant" />
+              <label for="supplierId">Supplier:</label>
+              <select id="supplierId" name="supplierId" required>
+                <!-- Supplier options will be dynamically populated by JavaScript -->
+              </select>
+
+              <button type="submit">Submit</button>
             </fieldset>
           </form>
         </div>
       </section>
-      <div class="relation-space">
-        <h3 class="heading-tertiary">Restaurant - Supplier Intersection:</h3>
-        <nav class=main-nav>
-          <a class="main-nav-link" href="restaurantSuppliers.html">Restaurant Suppliers</a>
-        </nav>  
-      </div>
     </main>
     <footer>
       <p>
         Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
         541-711-1511
       </p>
-    </footer class="footer">
-    <script src="restaurants.js"></script>
+    </footer class=footer>
+    <script src="restaurantSuppliers.js"></script>
   </body>
 </html>

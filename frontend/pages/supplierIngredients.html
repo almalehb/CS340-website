@@ -1,66 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Supplier Ingredients</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Supplier Ingredients Records</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="restaurants.html">Restaurants</a></li>
-                <li><a href="menus.html">Menus</a></li>
-                <li><a href="dishes.html">Dishes</a></li>
-                <li><a href="ingredients.html">Ingredients</a></li>
-                <li><a href="suppliers.html">Suppliers</a></li>
-                <li><a href="deliveries.html">Deliveries</a></li>
-            </ul>
-        </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coiny&family=Montserrat:ital,wght@0,200;0,300;0,700;1,200;1,300;1,600&family=Roboto:ital,wght@0,300;0,700;0,900;1,300;1,500;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Supplier - Ingredients</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li>
+            <a class="main-nav-link" href="restaurants.html">Restaurants</a>
+          </li>
+          <li><a class="main-nav-link" href="menus.html">Menus</a></li>
+          <li><a class="main-nav-link" href="dishes.html">Dishes</a></li>
+          <li>
+            <a class="main-nav-link" href="ingredients.html">Ingredients</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="suppliers.html">Suppliers</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="deliveries.html">Deliveries</a>
+          </li>
+        </ul>
+      </nav>
+
+      <a href="../index.html">
+        <img class="logo" alt="ChowDown logo" src="../img/chowdown-logo.png" />
+      </a>
     </header>
     <main>
-        <section>
-            <h2>Supplier Ingredients Table</h2>
-            <table>
-                <thead>
-                    <tr>
+        <section class="section-data">
+            <div class="data">
+                <h2 class="heading-secondary">Supplier Ingredients Table</h2>
+                <table>
+                    <thead>
+                        <tr>
                         <th>Id</th>
                         <th>Ingredient</th>
                         <th>Supplier</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="table-data">
-                   
-                </tbody>
-            </table>
-            
-            <form id="delivery-form" style="margin-top: 20px;">
+                        </tr>
+                    </thead>
+                    <tbody id="table-data"></tbody>
+                </table>
+
+                <form id="delivery-form" style="margin-top: 20px">
                 <fieldset>
                     <legend>Insert new item</legend>
-                    
+
                     <label for="ingredientId">Ingredient:</label>
                     <select id="ingredientId" name="ingredientId" required>
-                        <!-- Ingredient options will be dynamically populated by JavaScript -->
+                    <!-- Ingredient options will be dynamically populated by JavaScript -->
                     </select>
-            
+
                     <label for="supplierId">Supplier:</label>
                     <select id="supplierId" name="supplierId" required>
-                        <!-- Supplier options will be dynamically populated by JavaScript -->
+                    <!-- Supplier options will be dynamically populated by JavaScript -->
                     </select>
-            
+
                     <button type="submit">Submit</button>
                 </fieldset>
-            </form>
-            
-        </section>
-        
+                </form>
+            </div>
+      </section>
     </main>
-    <footer>
-        <p>Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone: 541-711-1511</p>
+    <footer class="footer">
+      <p>
+        Contact Information: 181 California Drive, Corvallis, OR, 97709. Phone:
+        541-711-1511
+      </p>
     </footer>
     <script src="supplierIngredients.js"></script>
-</body>
+  </body>
 </html>
