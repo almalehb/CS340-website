@@ -1,6 +1,7 @@
-/*
-    SETUP for a simple web app
-*/
+/* 
+The project uses the CS 340 starter code and heavily modifies it with details specific to our project, such as CRUD logic, frontend JavaScript, etc. 
+*/ 
+
 // Express
 var express = require("express"); // We are using the express library for the web server
 var app = express(); // We need to instantiate an express object to interact with the server in our code
