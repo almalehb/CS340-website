@@ -9,9 +9,9 @@ var mysql = require("mysql");
 var pool = mysql.createPool({
   connectionLimit: 10,
   host: "classmysql.engr.oregonstate.edu",
-  user: "cs340_almalehb",
-  password: "9118",
-  database: "cs340_almalehb",
+  user: "cs340_ONID",
+  password: "xxxx",
+  database: "cs340_ONID",
 });
 
 // Export it for use in our application
