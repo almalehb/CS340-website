@@ -144,3 +144,42 @@ function editRow(row) {
     editButton.textContent = "Edit";
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchDishesWithIngredients();
+});
+
+function fetchDishesWithIngredients() {
+  fetch('/api/DishesIngredients')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network error');
+          }
+          return response.json();
+      })
+      .then(dishes => {
+          const dishesContainer = document.getElementById("DishIngredients");
+
+          dishesContainer.innerHTML = '';
+          const headline = document.createElement('h2');
+          headline.textContent = `Dish Ingredients`;
+          dishesContainer.appendChild(headline);
+          dishes.forEach(dish => {
+              const details = document.createElement('details');
+              const summary = document.createElement('summary');
+              summary.textContent = `${dish.dishName} (Dish ID: ${dish.dishId}, Type: ${dish.dishType})`;
+              details.appendChild(summary);
+
+              const ingredientsList = document.createElement('ul');
+              dish.ingredients.forEach(ingredient => {
+                  const li = document.createElement('li');
+                  li.textContent = `${ingredient.ingredientName} (Ingredient ID: ${ingredient.ingredientId}, Type: ${ingredient.ingredientType})`;
+                  ingredientsList.appendChild(li);
+              });
+
+              details.appendChild(ingredientsList);
+              dishesContainer.appendChild(details);
+          });
+      })
+      .catch(error => console.error('Failed to fetch dishes with ingredients:', error));
+}

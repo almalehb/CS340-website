@@ -792,3 +792,39 @@ app.delete("/api/restaurantSuppliers/:restaurantSupplierId", (req, res) => {
     }
   );
 });
+
+
+// CRUD for DishIngredients 
+
+app.get("/api/DishesIngredients", async (req, res) => {
+  const query = `
+      SELECT d.dishId, d.dishName, d.dishType, i.ingredientId, i.ingredientName, i.ingredientType
+      FROM Dishes d
+      JOIN DishIngredients di ON d.dishId = di.dishId
+      JOIN Ingredients i ON di.ingredientId = i.ingredientId
+      ORDER BY d.dishId, i.ingredientId;
+  `;
+
+  db.pool.query(query, (err, results) => {
+    if (err) {
+        console.error("Error fetching DishIngredients:", err);
+        return res.status(500).send("Error");
+    }
+
+    const dishes = results.reduce((acc, current) => {
+        const { dishId, dishName, dishType, ingredientId, ingredientName, ingredientType } = current;
+        if (!acc[dishId]) {
+            acc[dishId] = {
+                dishId,
+                dishName,
+                dishType,
+                ingredients: []
+            };
+        }
+        acc[dishId].ingredients.push({ ingredientId, ingredientName, ingredientType });
+        return acc;
+    }, {});
+
+    res.json(Object.values(dishes));
+  });
+});
