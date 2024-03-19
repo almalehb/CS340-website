@@ -33,6 +33,41 @@ body {
 /**************************/
 /* REUSABLE COMPONENTS */
 /**************************/
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #333;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f99c39;
+}
+
+table tr:hover {
+  background-color: #fff;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4f2902;
+  color: #fff;
+}
+
+th {
+  font-size: 2rem;
+}
+
+td {
+  font-size: 2rem;
+}
+
 .heading-primary1,
 .heading-secondary,
 .heading-tertiary {
@@ -74,37 +109,4 @@ body {
   line-height: 1.2;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
 
-table td,
-table th {
-  border: 1px solid #333;
-  padding: 8px;
-}
-
-table tr:nth-child(even) {
-  background-color: #f99c39;
-}
-
-table tr:hover {
-  background-color: #fff;
-}
-
-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4f2902;
-  color: #fff;
-}
-
-th {
-  font-size: 2rem;
-}
-
-td {
-  font-size: 2rem;
-}
