@@ -95,12 +95,28 @@
   align-items: center;
 }
 
+fieldset * { 
+  font-size: 1.5rem;
+  padding: 2pt;
+  margin: 3pt;
+}
+
 /**************************/
 /* INTERSECTION SPACE */
 /**************************/
 .relation-space {
   background-color: #f99c39;
   padding: 0.5rem 3.2rem 0.5rem 3.2rem;
+}
+
+h2 { 
+  font-size: 3rem;
+  padding: 5pt;
+}
+
+details * {
+  font-size: 2rem;
+  padding: 2pt;
 }
 
 /**************************/
