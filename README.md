@@ -163,3 +163,37 @@
 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
 # This code was adapted to our JS pages including: deliveries.js, dishes.js, ingredients.js, menus.js, restaurants.js, suppliers.js, restaurantSuppliers.js, and supplierIngredients.js
 
+# Citation for the following code:
+    var mysql = require("mysql");
+
+    // Create a 'connection pool' using the provided credentials
+    var pool = mysql.createPool({
+    connectionLimit: 10,
+    host: "classmysql.engr.oregonstate.edu",
+    user: "cs340_xxx",
+    password: "xxxx",
+    database: "cs340_xxx",
+    });
+
+    // Export it for use in our application
+    module.exports.pool = pool;
+
+    var express = require("express"); // We are using the express library for the web server
+    var app = express(); // We need to instantiate an express object to interact with the server in our code
+    PORT = 65412; // Set a port number at the top so it's easy to change in the future
+
+    // Database
+    var db = require("./db-connector");
+    app.listen(PORT, function () {
+    // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+    console.log(
+        "Express started on http://localhost:" +
+        PORT +
+        "; press Ctrl-C to terminate."
+    );
+    });
+
+# Date: 3/18/24
+# Adapted from: CS340 starter code nodejs-starter-app
+# Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app?tab=readme-ov-file
+# This code was adapted to our JS pages including: app.js, db-connector.js
